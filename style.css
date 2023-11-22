@@ -1,0 +1,50 @@
+html
+{
+    height: 100%;
+    overflow: hidden;
+    font-family: Helvetica;
+}
+
+body
+{
+    height: 100%;
+    margin: 0;
+
+    background: #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+body>div:first-child
+{
+    padding: 8px;
+    border-bottom: 1px solid black;
+}
+
+/* Content container */
+body>div:last-child
+{
+    padding: 8px;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+/* Level block */
+#levels>div
+{
+    display:flex;
+    flex-direction: row;
+    gap: .5em;
+
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+/* Level thumbnail */
+#levels>div>img
+{
+    flex-shrink: 0;
+    width: 300px;
+    height: auto;
+}
