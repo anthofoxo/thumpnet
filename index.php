@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
     <head>
+
+
+        <title>ThumpNet</title>
+        <meta name="description" content="ThumpNet"/>
+        <meta name="keywords" content="Thumper,ThumpNet"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="style.css"/>
+        <link rel="icon" type="image/png" href="favicon.png"/>
         <script src="build_level_list.js" defer></script>
     </head>
     <body>
@@ -13,10 +21,10 @@
             Thumpnet is a custom level host for <a href="https://thumpergame.com/">Thumper</a>.
             I'm <a href="discord://-/users/218415631479996417">@anthofoxo</a>, lead dev of the website and api.
             This is a succesor and more permanent solution to the efforts by Bigphish.
+            UPDATE: All songs from the old thumpnet spreadsheet are available here!
 
-            To keep up with the thumper community and progress of this. Join the <a href="https://discord.gg/FU2X9z4ttJ">thumper discord</a>.
+            Join the <a href="https://discord.gg/FU2X9z4ttJ">thumper discord</a>.
 
-            <a href="https://docs.google.com/spreadsheets/d/19SbuARLhHfxTcZXDEGzxeQIdpJR0acTPTNtwrnwUtUI/edit?usp=sharing">Custom level spreadsheet.</a>
             <hr/>
 
             <h3>Todo:</h3>

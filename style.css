@@ -10,7 +10,8 @@ body
     height: 100%;
     margin: 0;
 
-    background: #ccc;
+    background-color: #001;
+    color: #fcd5c3;
     display: flex;
     flex-direction: column;
 }

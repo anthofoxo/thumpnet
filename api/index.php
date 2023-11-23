@@ -10,30 +10,33 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     $result->data_seek($row_no);
     $row = $result->fetch_assoc();
     
-    $reply["levels"][$row_no]["id"] = $row["id"];
-    $reply["levels"][$row_no]["uploader"] = $row["uploader"];
+    $element = array();
+
+    $element["id"] = $row["id"];
+    $element["name"] = $row["name"];
+    $element["cdn"] = $row["cdn"];
+    $element["difficulty"] = $row["difficulty"];
+    $element["description"] = $row["description"];
+    $element["thumb"] = $row["thumb"];
+
+    $element["uploader"] = $row["uploader"];
 
     if ($should_resolve_users)
         $user_ids[$row["uploader"]] = "";
 
-    $reply["levels"][$row_no]["name"] = $row["name"];
-    $reply["levels"][$row_no]["cdn"] = $row["cdn"];
-    $reply["levels"][$row_no]["difficulty"] = $row["difficulty"];
-    $reply["levels"][$row_no]["description"] = $row["description"];
-    $reply["levels"][$row_no]["thumb"] = $row["thumb"];
-
     if(isset($row["authors"]))
         $authors = json_decode($row["authors"]);
+
+    $element["authors"] = $authors;
 
     if ($should_resolve_users)
         foreach($authors as $author)
             $user_ids[$author] = "";
 
-   
-    $reply["levels"][$row_no]["authors"] = $authors;
-
     if(isset($row["extra"]))
-        $reply["levels"][$row_no]["extra"] = json_decode($row["extra"]);
+        $element["extra"] = json_decode($row["extra"]);
+
+    $reply["levels"][$row_no] = $element;
 }
 
 // Resovle all user ids
