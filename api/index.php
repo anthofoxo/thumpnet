@@ -1,6 +1,5 @@
 <?php
-$settings = parse_ini_file('mysqli.ini', true);
-$mysqli = new mysqli($settings['db']['hostname'], $settings['db']['username'], $settings['db']['password'], $settings['db']['database']);
+include "db.php";
 
 $result = $mysqli->query("SELECT * FROM levels");
 
@@ -23,7 +22,8 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     $reply["levels"][$row_no]["description"] = $row["description"];
     $reply["levels"][$row_no]["thumb"] = $row["thumb"];
 
-    $authors = json_decode($row["authors"]);
+    if(isset($row["authors"]))
+        $authors = json_decode($row["authors"]);
 
     if ($should_resolve_users)
         foreach($authors as $author)

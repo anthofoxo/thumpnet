@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css"/>
+        <script src="build_level_list.js" defer></script>
     </head>
     <body>
         <div>
@@ -38,93 +39,6 @@
             <a href="https://docs.google.com/document/d/1zwrpMhfugF7f_sxgpWUM9_cnOXtubOyFIqd7TCRryxM">Thumper manual 2.0</a>
 
             <div id="levels"></div>
-
-            <script>
-                fetch("api/?resolve=user")
-                .then((response)=>response.json())
-                .then((response)=>
-                {
-                    let levels = response.levels;
-
-                    let container = document.getElementById("levels");
-
-                    for(level of levels)
-                    {
-                        let root = document.createElement("div");
-
-                        {
-                            let element = document.createElement("img");
-                            if(level.thumb) element.src = "cdn/" + level.thumb;
-                            else element.alt = "No thumbnail";
-                            root.appendChild(element);
-                        }
-
-                        let metdata = document.createElement("div");
-
-                        {
-                            let element = document.createElement("h4");
-                            element.textContent = level.name;
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("h5");
-                            element.textContent = level.description;
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("div");
-                            element.innerHTML = "<b>Difficulty: </b>" + level.difficulty;
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("div");
-
-                            let author_strings = [];
-
-                            for(author of level.authors)
-                                author_strings.push(response.resolve.user[author]);
-
-                            element.innerHTML = "<b>Authors: </b>" + author_strings;
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("div");
-                            element.innerHTML = "<b>Uploaded by: </b>" + response.resolve.user[level.uploader];
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("div");
-                            if(level.extra) element.innerHTML = "<b>Bpm: </b>" + level.extra.bpm;
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("div");
-                            if(level.extra) element.innerHTML = "<b>Num sublevels: </b>" + level.extra.sublevels;
-                            metdata.appendChild(element);
-                        }
-
-                        {
-                            let element = document.createElement("a");
-                            element.textContent = "Download";
-                            element.href = "cdn/" + level.cdn;
-                            element.style.display = "block";
-                            element.style.padding = "0 0 2em 0";
-                            metdata.appendChild(element);
-                        }
-
-                        root.appendChild(metdata);
-
-                        container.appendChild(root);
-                    }
-
-                });
-            </script>
         </div>
     </body>
 </html>
