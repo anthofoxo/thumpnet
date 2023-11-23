@@ -12,6 +12,12 @@
     src: url(Futura_PT_Heavy.ttf);
 }
 
+:root
+{
+    --foreground-color: #fcd5c3;
+    --background-color: #001;
+}
+
 html
 {
     height: 100%;
@@ -24,8 +30,8 @@ body
     height: 100%;
     margin: 0;
 
-    background-color: #001;
-    color: #fcd5c3;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +45,7 @@ a
 body>div:first-child
 {
     padding: 8px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--foreground-color);
 }
 
 /* Content container */
@@ -48,6 +54,12 @@ body>div:last-child
     padding: 8px;
     flex-grow: 1;
     overflow: auto;
+}
+
+#levels
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
 }
 
 /* Level block */
@@ -64,6 +76,7 @@ body>div:last-child
 /* Level thumbnail */
 #levels>div>img
 {
-    width: 300px;
+    width: min(300px, 50%);
     object-fit: scale-down;
+    flex-shrink: 0;
 }

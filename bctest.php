@@ -1,6 +1,5 @@
 <?php
 $settings = parse_ini_file('api/config.ini', true);
-echo $settings["security"]["secretkey"] . "<br>";
 echo password_hash($settings["security"]["secretkey"] . $_GET["password"], PASSWORD_BCRYPT) . '<br>';
 
 function format_uuidv4($data)
