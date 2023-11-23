@@ -1,0 +1,64 @@
+!!! Warnings !!!
+
+Wamp by default is setup for a development environment and
+is not secure for public use without modification.
+
+!!! Installation !!!
+
+You do not have access to the cdn or mysql database when running locally.
+https://sourceforge.net/projects/wampserver/ is highly suggested.
+You should NOT host your local version publically.
+
+Pay attention and read the warning when installing!
+
+You likely do not have the requied VC++ packages installed. If you're promted to install them.
+https://wampserver.aviatechno.net/files/vcpackages/all_vc_redist_x86_x64.zip
+
+Once installed. You may start up wampserver. You should see a green icon in your system tray.
+If this is the case, everything is running and the server is accessable at `localhost` or `127.0.0.1`
+The default wampserver page will display.
+
+!!! Adding the virtual host !!!
+Virual hosts allow once server to serve from multiple domain names.
+We add one here so it won't conflict with wampserver's default website or any others you may have.
+open `http://localhost/add_vhost.php`
+enter all the information you want, its highly recommended to setup a 127.x.y.z address for this.
+Create the virtual host, then restart dns (right click the system trap icon, tools, first item "restart dns")
+The virutalhost is now available at the specified address
+
+If you visit the address you should see a blank directory listing.
+Simply cut and paste the the entire thumpnet repo into this directory.
+
+Reload and the basic website should display. You should expect see a http 500 error in the console.
+This is due the api failing to connect to a database.
+
+!!! Database !!!
+Log into http://localhost/phpmyadmin/
+username: root, password is empty. (security of this doesnt matter, its local ^^)
+
+you may either do this with the sql tab and manually submit queries or use the gui.
+For simplicity the sql queries will be shown.
+
+CREATE DATABASE `databasename`;
+USE `databasename`;
+CREATE TABLE `users` (`id` INT NOT NULL AUTO_INCREMENT, `username` VARCHAR(32) NOT NULL, `password` VARCHAR(64) NOT NULL, PRIMARY KEY(`id`), UNIQUE(`username`));
+CREATE TABLE `levels` (`id` INT NOT NULL AUTO_INCREMENT, `uploader` INT NOT NULL, `cdn` VARCHAR(64) NULL, `name` VARCHAR(64) NOT NULL, `difficulty` INT NULL, `authors` JSON NULL, `description` TINYTEXT NULL, `thumb` VARCHAR(64) NULL, `extra` JSON NULL, PRIMARY KEY(`id`), FOREIGN KEY(`uploader`) REFERENCES `users`(`id`));
+INSERT INTO `users` (`username`, `password`) VALUES ('username', 'password'); // This is your local login for thumpnet
+INSERT INTO `levels` (`uploader`, `cdn`, `name`, `difficulty`, `authors`, `description`, `thumb`) VALUES ('1', 'test.zip', 'test', '0', '[1]', 'Test', 'thumb.png');
+
+This is enough to get the api to respond with data. However the api doesnt know your sql login information.
+create `api/mysqli.ini`
+
+Contents of this file should be as follows, but data replaced with the details you used
+
+[db]
+hostname = "localhost"
+username = "root"
+password = ""
+database = "databasename"
+
+--- Apache modules ---
+For protecting some files, the Order directive is used, this is disabled by default
+goto the tray icon->apache->httpd.conf, search this line and uncomment it
+`LoadModule access_compat_module modules/mod_access_compat.so`
+restart all services and access /api and see if you get a reply

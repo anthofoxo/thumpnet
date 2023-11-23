@@ -40,7 +40,7 @@
             <div id="levels"></div>
 
             <script>
-                fetch("https://thumpnet.anthofoxo.xyz/api/?resolve=user")
+                fetch("api/?resolve=user")
                 .then((response)=>response.json())
                 .then((response)=>
                 {

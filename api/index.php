@@ -4,6 +4,8 @@ $mysqli = new mysqli($settings['db']['hostname'], $settings['db']['username'], $
 
 $result = $mysqli->query("SELECT * FROM levels");
 
+$should_resolve_users = isset($_GET["resolve"]) && $_GET["resolve"] == "user";
+
 for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
 {
     $result->data_seek($row_no);
@@ -12,7 +14,7 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     $reply["levels"][$row_no]["id"] = $row["id"];
     $reply["levels"][$row_no]["uploader"] = $row["uploader"];
 
-    if ($_GET["resolve"] == "user")
+    if ($should_resolve_users)
         $user_ids[$row["uploader"]] = "";
 
     $reply["levels"][$row_no]["name"] = $row["name"];
@@ -23,17 +25,19 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
 
     $authors = json_decode($row["authors"]);
 
-    if ($_GET["resolve"] == "user")
+    if ($should_resolve_users)
         foreach($authors as $author)
             $user_ids[$author] = "";
 
    
     $reply["levels"][$row_no]["authors"] = $authors;
-    $reply["levels"][$row_no]["extra"] = json_decode($row["extra"]);
+
+    if(isset($row["extra"]))
+        $reply["levels"][$row_no]["extra"] = json_decode($row["extra"]);
 }
 
 // Resovle all user ids
-if ($_GET["resolve"] == "user")
+if ($should_resolve_users)
 {
     $result = $mysqli->query("SELECT id,username FROM users");
 
