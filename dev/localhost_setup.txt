@@ -62,3 +62,6 @@ For protecting some files, the Order directive is used, this is disabled by defa
 goto the tray icon->apache->httpd.conf, search this line and uncomment it
 `LoadModule access_compat_module modules/mod_access_compat.so`
 restart all services and access /api and see if you get a reply
+
+--- Create the cdn ---
+Create a `cdn` folder and put the thumbnail/level into it, this will match the sql query above
