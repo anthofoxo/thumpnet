@@ -1,8 +1,22 @@
+@font-face
+{
+    font-family: Futura;
+    font-weight: normal;
+    src: url(Futura_PT_Book.ttf);
+}
+
+@font-face
+{
+    font-family: Futura;
+    font-weight: bold;
+    src: url(Futura_PT_Heavy.ttf);
+}
+
 html
 {
     height: 100%;
     overflow: hidden;
-    font-family: Helvetica;
+    font-family: Futura;
 }
 
 body
@@ -14,6 +28,11 @@ body
     color: #fcd5c3;
     display: flex;
     flex-direction: column;
+}
+
+a
+{
+    color: #5f5fff;
 }
 
 /* Header */
@@ -45,7 +64,6 @@ body>div:last-child
 /* Level thumbnail */
 #levels>div>img
 {
-    flex-shrink: 0;
     width: 300px;
-    height: auto;
+    object-fit: scale-down;
 }

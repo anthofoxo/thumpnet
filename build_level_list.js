@@ -32,8 +32,22 @@ fetch("api/?resolve=user")
         }
 
         {
+            let label = document.createElement("span");
+            label.textContent = "Difficulty: ";
+            label.style.fontWeight = "bold";
+
+            let icon = document.createElement("img");
+            icon.src = "images/D" + level.difficulty + ".png";
+            icon.alt = "D" + level.difficulty;
+
+            let difficulty = document.createElement("span");
+            difficulty.textContent = "D" + level.difficulty;
+
             let element = document.createElement("div");
-            element.innerHTML = "<b>Difficulty: </b>D" + level.difficulty;
+            element.appendChild(label);
+            element.appendChild(icon);
+            element.appendChild(difficulty);
+
             metdata.appendChild(element);
         }
 

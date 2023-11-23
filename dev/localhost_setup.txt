@@ -56,6 +56,8 @@ hostname = "localhost"
 username = "root"
 password = ""
 database = "databasename"
+[security]
+secretkey = "secretkey"
 
 --- Apache modules ---
 For protecting some files, the Order directive is used, this is disabled by default

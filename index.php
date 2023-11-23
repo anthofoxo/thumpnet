@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-
-
         <title>ThumpNet</title>
         <meta name="description" content="ThumpNet"/>
         <meta name="keywords" content="Thumper,ThumpNet"/>
@@ -14,15 +12,12 @@
     </head>
     <body>
         <div>
-            This domain name is not final
+            <h3>ThumpNet</h3>
         </div>
         <div>
-        <h2>Info</h2>
-            Thumpnet is a custom level host for <a href="https://thumpergame.com/">Thumper</a>.
-            I'm <a href="discord://-/users/218415631479996417">@anthofoxo</a>, lead dev of the website and api.
+            ThumpNet is a custom level host for <a href="https://thumpergame.com/">Thumper</a>.
             This is a succesor and more permanent solution to the efforts by Bigphish.
-            UPDATE: All songs from the old thumpnet spreadsheet are available here!
-
+            I'm <a href="discord://-/users/218415631479996417">@anthofoxo</a>, lead dev of the website and api.
             Join the <a href="https://discord.gg/FU2X9z4ttJ">thumper discord</a>.
 
             <hr/>
@@ -32,7 +27,6 @@
                 <li>Difficulty icons. Awaiting larger files or svg files</li>
                 <li>Default thumbail</li>
                 <li>Difficulty chart detailing</li>
-                <li>Look into using Futura PT Heavy</li>
                 <li>A versioning system for custom levels</li>
                 <li>.innerHTML is being used, this is a security risk, prefer .textContent</li>
             </ul>
@@ -41,7 +35,7 @@
 
             <h2>Difficulty chart HTML table (wip)</h2>
             <?php include("difficulty_table.html");?>
-            See: <a href="difficulty_table.html">External table<a> (Use this to make edits to the difficulty table)
+            See: <a href="difficulty_table.html">External table</a> (Use this to make edits to the difficulty table)
 
             <a href="https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/releases/tag/2.0">Thumper custom level editor 2.0</a>
             <a href="https://docs.google.com/document/d/1zwrpMhfugF7f_sxgpWUM9_cnOXtubOyFIqd7TCRryxM">Thumper manual 2.0</a>
