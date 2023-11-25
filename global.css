@@ -1,0 +1,46 @@
+/* Global styling options, affects ALL pages */
+
+/* CSS variables */
+:root
+{
+    --foreground-color: #fcd5c3;
+    --background-color: #001;
+}
+
+/* Setup Futura font face, includes book and heavy */
+@font-face
+{
+    font-family: Futura;
+    font-weight: normal;
+    src: url(Futura_PT_Book.ttf);
+}
+
+@font-face
+{
+    font-family: Futura;
+    font-weight: bold;
+    src: url(Futura_PT_Heavy.ttf);
+}
+
+/* Make sure the html tag spans the entire height */
+/* Set the font family, this will be inherited down the DOM tree */
+html
+{
+    height: 100%;
+    font-family: Futura;
+}
+
+/* Make sure the body spans the height of the html element */
+/* Set the foreground and background colors */
+body
+{
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+}
+
+/* Lighten up all links, also overrides the `a:visited` selector */
+a
+{
+    color: #5f5fff;
+}

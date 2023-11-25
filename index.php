@@ -8,7 +8,8 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="preload" href="default_thumb.jpg" as="image"/>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="global.css"/>
+        <link rel="stylesheet" href="landing.css"/>
         <link rel="icon" type="image/png" href="favicon.png"/>
 
         <script src="build_level_list.js" defer></script>
