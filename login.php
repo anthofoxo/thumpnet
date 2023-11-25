@@ -43,13 +43,43 @@
         ?>
 
         <?php include "metadata.html";?>
+
+        <style>
+            body>div {
+                height: 100%;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: .5em;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: .5em;
+            }
+        </style>
     </head>
     <body>
-        <h1>Login Form</h1>
-        <form method="POST">
-            <input type="text" name="username" placeholder="username"></input><br/>
-            <input type="password" name="password" placeholder="password"></input><br/>
-            <input type="submit" value="Login"></input>
-        </form>
+        <div>
+            <span style="font-size:2em;font-weight:bold;">Login Form</span>
+            <span id="message" style="color:red;font-weight:bold;"></span>
+            <form method="POST">
+                <input type="text" name="username" placeholder="username"></input>
+                <input type="password" name="password" placeholder="password"></input>
+                <div>
+                    <input type="submit" value="Login"></input>
+                    <input type="button" value="Cancel" onclick='window.location.href = "/";'></input>
+                </div>
+            </form>
+        </div>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            if("failed" === urlParams.get("status"))
+            {
+                document.getElementById("message").textContent = "Failed to login";
+            }
+        </script>
     </body>
 </html>

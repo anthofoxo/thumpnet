@@ -12,15 +12,17 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     
     $element = array();
 
-    $element["id"] = $row["id"];
+    // Required fields
+    $element["id"] = intval($row["id"]);
+    $element["has_thumb"] = intval($row["has_thumb"]);
+    $element["has_content"] = intval($row["has_content"]);
+    $element["uploader"] = intval($row["uploader"]);
+
+    // Optional fields
     $element["name"] = $row["name"];
     $element["cdn"] = $row["cdn"];
     $element["difficulty"] = intval($row["difficulty"]);
     $element["description"] = $row["description"];
-
-    $element["has_thumb"] = intval($row["has_thumb"]);
-    $element["has_content"] = intval($row["has_content"]);
-    $element["uploader"] = intval($row["uploader"]);
 
     if ($should_resolve_users)
         $user_ids[$row["uploader"]] = "";
@@ -43,7 +45,7 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
 // Resovle all user ids
 if ($should_resolve_users)
 {
-    $result = $mysqli->query("SELECT id,username FROM users");
+    $result = $mysqli->query("SELECT `id`,`username` FROM `users`");
 
     for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     {
