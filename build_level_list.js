@@ -1,3 +1,24 @@
+function CreateLabeledText(label, data)
+{
+    let dom_container = document.createElement("div");
+
+    if(data != undefined)
+    {
+        let dom_label = document.createElement("span");
+        let dom_data = document.createElement("span");
+
+        dom_label.textContent = label + ": ";
+        dom_label.style.fontWeight = "bold";
+
+        dom_data.textContent = data;
+
+        dom_container.appendChild(dom_label);
+        dom_container.appendChild(dom_data);
+    }
+
+    return dom_container;
+}
+
 fetch("api/?resolve=user")
 .then((response)=>response.json())
 .then((response)=>
@@ -52,7 +73,6 @@ fetch("api/?resolve=user")
                 img.onload = function()
                 {
                     element.src = img.src;
-                    element.alt = level.name;
                 }
                 img.onerror = function()
                 {
@@ -74,10 +94,11 @@ fetch("api/?resolve=user")
         let metdata = document.createElement("div");
         metdata.className = "stylingmetadata";
 
+        // Level description
         {
             let element = document.createElement("div");
             element.textContent = level.description;
-            element.style.cssText = 'font-style:italic;';
+            element.classList.add("level_description");
             metdata.appendChild(element);
         }
 
@@ -102,32 +123,36 @@ fetch("api/?resolve=user")
         }
 
         {
-            let element = document.createElement("div");
-
             let author_strings = [];
 
             for(author of level.authors)
                 author_strings.push(response.resolve.user[author]);
 
-            element.innerHTML = "<b>Authors: </b>" + author_strings;
-            metdata.appendChild(element);
+            metdata.appendChild(CreateLabeledText("Authors", author_strings));
         }
 
+        metdata.appendChild(CreateLabeledText("Uploaded by", response.resolve.user[level.uploader]));
+        metdata.appendChild(CreateLabeledText("Bpm", level.extra?.bpm));
+        metdata.appendChild(CreateLabeledText("Num sublevels", level.extra?.sublevels));
+        
         {
-            let element = document.createElement("div");
-            element.innerHTML = "<b>Uploaded by: </b>" + response.resolve.user[level.uploader];
-            metdata.appendChild(element);
-        }
+            let element = document.createElement("a");
+            
+            element.style.display = "block";
+            element.style.padding = "0 0 2em 0";
 
-        {
-            let element = document.createElement("div");
-            if(level.extra) element.innerHTML = "<b>Bpm: </b>" + level.extra.bpm;
-            metdata.appendChild(element);
-        }
+            if(level.has_content)
+            {
+                element.textContent = "Download";
+                element.href = "cdn/" + level.cdn + ".zip";
+                
+            }
+            else
+            {
+                element.textContent = "No Download Available";
+                element.style.color = "red";
+            }
 
-        {
-            let element = document.createElement("div");
-            if(level.extra) element.innerHTML = "<b>Num sublevels: </b>" + level.extra.sublevels;
             metdata.appendChild(element);
         }
 

@@ -34,7 +34,7 @@ body>div:last-child
     gap: .5em;
 }
 
-/* Level block */
+/* Level card */
 #levels>div
 {
     display:grid;
@@ -46,9 +46,10 @@ body>div:last-child
         "thumbnail metadata"
         "downloadbutton downloadbutton";
     
-    padding: .5em;
+    padding: .5rem;
+    gap: .5rem;
     background-color: #003;
-    border-radius: 1em;
+    border-radius: 1rem;
 
     /* Media query below will unset this if reduced motion is wanted */
     transition: background-color 0.1s;
@@ -90,6 +91,12 @@ body>div:last-child
     font-size: 2em;
     font-weight: bold;
     text-align: center;
+}
+
+.level_description
+{
+    line-break: anywhere;
+    font-style: italic;
 }
 
 /* Level thumbnail */
