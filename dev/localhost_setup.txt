@@ -67,3 +67,5 @@ restart all services and access /api and see if you get a reply
 
 --- Create the cdn ---
 Create a `cdn` folder and put the thumbnail/level into it, this will match the sql query above
+
+Testing commits
