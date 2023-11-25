@@ -60,23 +60,78 @@ body>div:last-child
 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: .5em;
 }
 
 /* Level block */
 #levels>div
 {
-    display:flex;
-    flex-direction: row;
-    gap: .5em;
+    display:grid;
 
-    margin-top: .5em;
-    margin-bottom: .5em;
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+    grid-template-areas:
+        "title title"
+        "thumbnail metadata";
+    
+    padding: .5em;
+    background-color: #003;
+    border-radius: 1em;
+
+    /* Media query below will unset this if reduced motion is wanted */
+    transition: background-color 0.1s;
+}
+
+@media (prefers-reduced-motion)
+{
+    #levels>div
+    {
+        transition: unset;
+    }
+}
+
+/* Level block hover */
+#levels>div:hover
+{
+    background-color: #006;
+}
+
+/* Move thumbnails above the level information when too small */
+@media only screen and (max-width: 600px)
+{
+    #levels>div
+    {        
+        justify-items: center;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "title"
+        "thumbnail"
+        "metadata";
+    }
+}
+
+/* Level title */
+#levels>div>div:first-child
+{
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    grid-area: title;
 }
 
 /* Level thumbnail */
 #levels>div>img
 {
-    width: min(300px, 50%);
-    object-fit: scale-down;
+    width: 100%;
+    /*object-fit: scale-down; Should be needed anymore???*/
     flex-shrink: 0;
+    grid-area: thumbnail;
+    border-radius: .5em;
+}
+
+/* Level metadata */
+#levels>div>div:last-child
+{
+    margin-left: 1em;
+    grid-area: metadata;
 }

@@ -11,6 +11,12 @@ fetch("api/?resolve=user")
         let root = document.createElement("div");
 
         {
+            let element = document.createElement("div");
+            element.textContent = level.name;
+            root.appendChild(element);
+        }
+
+        {
             let element = document.createElement("img");
             if(level.thumb) element.src = "cdn/" + level.thumb;
             else
@@ -22,12 +28,6 @@ fetch("api/?resolve=user")
         }
 
         let metdata = document.createElement("div");
-
-        {
-            let element = document.createElement("h4");
-            element.textContent = level.name;
-            metdata.appendChild(element);
-        }
 
         {
             let element = document.createElement("h5");
