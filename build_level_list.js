@@ -17,7 +17,32 @@ fetch("api/?resolve=user")
         }
 
         {
+            let donwloadbutton = document.createElement("div");
+            donwloadbutton.className = "downloadbutton"
+
+            {
+                let element = document.createElement("a");
+
+                if(level.has_content)
+                {
+                    element.textContent = "Download";
+                    element.href = "cdn/" + level.cdn + ".zip";
+                }
+                else
+                {
+                    element.textContent = "No Download Available";
+                    element.style.color = "red";
+                }
+
+                donwloadbutton.appendChild(element);
+            }
+            root.appendChild(donwloadbutton);
+        }
+
+        {
+
             let element = document.createElement("img");
+            element.className = "stylingimg";
             element.src = "Loading.gif";
 
             if(level.has_thumb)
@@ -47,6 +72,7 @@ fetch("api/?resolve=user")
         }
 
         let metdata = document.createElement("div");
+        metdata.className = "stylingmetadata";
 
         {
             let element = document.createElement("div");
@@ -102,27 +128,6 @@ fetch("api/?resolve=user")
         {
             let element = document.createElement("div");
             if(level.extra) element.innerHTML = "<b>Num sublevels: </b>" + level.extra.sublevels;
-            metdata.appendChild(element);
-        }
-
-        {
-            let element = document.createElement("a");
-            
-            element.style.display = "block";
-            element.style.padding = "0 0 2em 0";
-
-            if(level.has_content)
-            {
-                element.textContent = "Download";
-                element.href = "cdn/" + level.cdn + ".zip";
-                
-            }
-            else
-            {
-                element.textContent = "No Download Available";
-                element.style.color = "red";
-            }
-
             metdata.appendChild(element);
         }
 

@@ -43,7 +43,8 @@ body>div:last-child
     align-items: center;
     grid-template-areas:
         "title title"
-        "thumbnail metadata";
+        "thumbnail metadata"
+        "downloadbutton downloadbutton";
     
     padding: .5em;
     background-color: #003;
@@ -77,33 +78,54 @@ body>div:last-child
         grid-template-areas:
         "title"
         "thumbnail"
-        "metadata";
+        "metadata"
+        "downloadbutton";
     }
 }
 
 /* Level title */
 #levels>div>div:first-child
 {
+    grid-area: title;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    grid-area: title;
 }
 
 /* Level thumbnail */
-#levels>div>img
+.stylingimg
 {
-    width: 100%;
-    /*object-fit: scale-down; Should be needed anymore???*/
-    flex-shrink: 0;
     grid-area: thumbnail;
+    width: 100%;
+    flex-shrink: 0;
     border-radius: .5em;
 }
 
 /* Level metadata */
-#levels>div>div:last-child
+.stylingmetadata
 {
-    margin-left: 1em;
     grid-area: metadata;
+    margin-left: 1em;
     color: #fff;
+}
+
+.downloadbutton {
+    grid-area: downloadbutton;
+    text-align: center;
+    width: 30%;
+    margin: auto;
+
+
+    background-color: #008;
+    color: #fff;
+
+    border-radius: 0.5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+.downloadbutton:hover
+{
+    background-color: #00a;
 }
