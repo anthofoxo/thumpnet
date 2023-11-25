@@ -4,9 +4,12 @@
         <?php
             session_start();
 
+            $redirect_success = "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+            $redirect_failed = "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
+
             if(isset($_SESSION["username"]))
             {
-                echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                echo $redirect_success;
                 exit;
             }
 
@@ -19,33 +22,27 @@
                 $result = $stmt->get_result();
                 if($result->num_rows != 1)
                 {
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
+                    echo $redirect_failed;
                     exit;
                 }
                 $row = $result->fetch_assoc();
     
-                $settings = parse_ini_file('api/config.ini', true);
+                $settings = parse_ini_file("api/config.ini", true);
                 
                 if(password_verify($settings["security"]["secretkey"] . $_POST["password"], $row["password"]))
                 {
                     $_SESSION["id"] = $row["id"];
                     $_SESSION["username"] = $row["username"];
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                    echo $redirect_success;
                 }
                 else
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
+                    echo $redirect_failed;
 
                 unset($settings);
             }
         ?>
 
-        <title>ThumpNet</title>
-        <meta name="description" content="ThumpNet"/>
-        <meta name="keywords" content="Thumper,ThumpNet"/>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="global.css"/>
-        <link rel="icon" type="image/png" href="favicon.png"/>
+        <?php include "metadata.html";?>
     </head>
     <body>
         <h1>Login Form</h1>
