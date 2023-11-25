@@ -1,44 +1,13 @@
-@font-face
-{
-    font-family: Futura;
-    font-weight: normal;
-    src: url(Futura_PT_Book.ttf);
-}
-
-@font-face
-{
-    font-family: Futura;
-    font-weight: bold;
-    src: url(Futura_PT_Heavy.ttf);
-}
-
-:root
-{
-    --foreground-color: #fcd5c3;
-    --background-color: #001;
-}
-
 html
 {
-    height: 100%;
     overflow: hidden;
-    font-family: Futura;
 }
 
 body
 {
-    height: 100%;
     margin: 0;
-
-    background-color: var(--background-color);
-    color: var(--foreground-color);
     display: flex;
     flex-direction: column;
-}
-
-a
-{
-    color: #5f5fff;
 }
 
 /* Header */
