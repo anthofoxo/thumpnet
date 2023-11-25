@@ -58,7 +58,7 @@ fetch("api/?resolve=user")
         {
 
             let element = document.createElement("img");
-            element.className = "stylingimg";
+            element.className = "stylinglevelimg";
             element.src = "Loading.gif";
 
             if(level.has_thumb)
@@ -87,7 +87,7 @@ fetch("api/?resolve=user")
         }
 
         let metdata = document.createElement("div");
-        metdata.className = "stylingmetadata";
+        metdata.className = "stylinglevelmetadata";
 
         // Level description
         {

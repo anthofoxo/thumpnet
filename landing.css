@@ -100,7 +100,7 @@ body>div:last-child
 }
 
 /* Level thumbnail */
-.stylingimg
+.stylinglevelimg
 {
     grid-area: thumbnail;
     width: 100%;
@@ -109,7 +109,7 @@ body>div:last-child
 }
 
 /* Level metadata */
-.stylingmetadata
+.stylinglevelmetadata
 {
     grid-area: metadata;
     margin-left: 1em;
