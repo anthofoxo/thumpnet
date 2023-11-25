@@ -44,3 +44,28 @@ a
 {
     color: #5f5fff;
 }
+
+/* Scrollbar styling, webkit only */
+::-webkit-scrollbar
+{
+    width: 12px;
+    height: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track
+{
+    background: #eee;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb
+{
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover
+{
+    background: #555;
+}

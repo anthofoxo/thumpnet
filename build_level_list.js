@@ -18,12 +18,31 @@ fetch("api/?resolve=user")
 
         {
             let element = document.createElement("img");
-            if(level.thumb) element.src = "cdn/" + level.thumb;
+            element.src = "Loading.gif";
+
+            if(level.has_thumb)
+            {
+                
+                let img = new Image();
+                img.onload = function()
+                {
+                    element.src = img.src;
+                    element.alt = level.name;
+                }
+                img.onerror = function()
+                {
+                    element.src = "default_thumb.jpg";
+                    element.alt = "Default thumbnail"
+                }
+
+                img.src = "cdn/" + level.cdn + ".png";
+            }
             else
             {
                 element.src = "default_thumb.jpg";
-                element.alt = "Default thumbnail";
+                element.alt = "Default thumbnail"
             }
+
             root.appendChild(element);
         }
 
@@ -91,10 +110,10 @@ fetch("api/?resolve=user")
             element.style.display = "block";
             element.style.padding = "0 0 2em 0";
 
-            if(level.cdn)
+            if(level.has_content)
             {
                 element.textContent = "Download";
-                element.href = "cdn/" + level.cdn;
+                element.href = "cdn/" + level.cdn + ".zip";
                 
             }
             else

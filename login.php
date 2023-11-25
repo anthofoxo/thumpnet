@@ -4,9 +4,12 @@
         <?php
             session_start();
 
+            $redirect_success = "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+            $redirect_failed = "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
+
             if(isset($_SESSION["username"]))
             {
-                echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                echo $redirect_success;
                 exit;
             }
 
@@ -19,40 +22,64 @@
                 $result = $stmt->get_result();
                 if($result->num_rows != 1)
                 {
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
+                    echo $redirect_failed;
                     exit;
                 }
                 $row = $result->fetch_assoc();
     
-                $settings = parse_ini_file('api/config.ini', true);
+                $settings = parse_ini_file("api/config.ini", true);
                 
                 if(password_verify($settings["security"]["secretkey"] . $_POST["password"], $row["password"]))
                 {
                     $_SESSION["id"] = $row["id"];
                     $_SESSION["username"] = $row["username"];
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                    echo $redirect_success;
                 }
                 else
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
+                    echo $redirect_failed;
 
                 unset($settings);
             }
         ?>
 
-        <title>ThumpNet</title>
-        <meta name="description" content="ThumpNet"/>
-        <meta name="keywords" content="Thumper,ThumpNet"/>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="global.css"/>
-        <link rel="icon" type="image/png" href="favicon.png"/>
+        <?php include "metadata.html";?>
+
+        <style>
+            body>div {
+                height: 100%;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: .5em;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: .5em;
+            }
+        </style>
     </head>
     <body>
-        <h1>Login Form</h1>
-        <form method="POST">
-            <input type="text" name="username" placeholder="username"></input><br/>
-            <input type="password" name="password" placeholder="password"></input><br/>
-            <input type="submit" value="Login"></input>
-        </form>
+        <div>
+            <span style="font-size:2em;font-weight:bold;">Login Form</span>
+            <span id="message" style="color:red;font-weight:bold;"></span>
+            <form method="POST">
+                <input type="text" name="username" placeholder="username"></input>
+                <input type="password" name="password" placeholder="password"></input>
+                <div>
+                    <input type="submit" value="Login"></input>
+                    <input type="button" value="Cancel" onclick='window.location.href = "/";'></input>
+                </div>
+            </form>
+        </div>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            if("failed" === urlParams.get("status"))
+            {
+                document.getElementById("message").textContent = "Failed to login";
+            }
+        </script>
     </body>
 </html>
