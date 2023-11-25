@@ -15,13 +15,12 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     $element["id"] = $row["id"];
     $element["name"] = $row["name"];
     $element["cdn"] = $row["cdn"];
-    $element["difficulty"] = $row["difficulty"];
+    $element["difficulty"] = intval($row["difficulty"]);
     $element["description"] = $row["description"];
 
-    $element["has_thumb"] = $row["has_thumb"];
-    $element["has_content"] = $row["has_content"];
-
-    $element["uploader"] = $row["uploader"];
+    $element["has_thumb"] = intval($row["has_thumb"]);
+    $element["has_content"] = intval($row["has_content"]);
+    $element["uploader"] = intval($row["uploader"]);
 
     if ($should_resolve_users)
         $user_ids[$row["uploader"]] = "";

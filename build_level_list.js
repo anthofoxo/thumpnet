@@ -20,7 +20,7 @@ fetch("api/?resolve=user")
             let element = document.createElement("img");
             element.src = "Loading.gif";
 
-            if(level.has_thumb == "1")
+            if(level.has_thumb)
             {
                 
                 let img = new Image();
