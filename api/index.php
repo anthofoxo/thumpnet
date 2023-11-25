@@ -17,7 +17,9 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
     $element["cdn"] = $row["cdn"];
     $element["difficulty"] = $row["difficulty"];
     $element["description"] = $row["description"];
-    $element["thumb"] = $row["thumb"];
+
+    $element["has_thumb"] = $row["has_thumb"];
+    $element["has_content"] = $row["has_content"];
 
     $element["uploader"] = $row["uploader"];
 
