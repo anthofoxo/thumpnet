@@ -18,12 +18,12 @@ fetch("api/?resolve=user")
 
         {
             let element = document.createElement("img");
-            if(level.thumb) element.src = "cdn/" + level.cdn + ".png";
-            else
-            {
-                element.src = "default_thumb.jpg";
-                element.alt = "Default thumbnail";
-            }
+            /*if(level.thumb)*/ element.src = "cdn/" + level.cdn + ".png";
+            //else
+            //{
+            //    element.src = "default_thumb.jpg";
+            //    element.alt = "Default thumbnail";
+            //}
             root.appendChild(element);
         }
 
