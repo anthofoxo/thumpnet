@@ -111,9 +111,14 @@ fetch("api/?resolve=user")
         
         {
             let element = document.createElement("a");
-            
             element.style.display = "block";
-            element.style.padding = "0 0 2em 0";
+            element.textContent = "View";
+            element.href = "view.php?level=" + level.id;
+            metdata.appendChild(element);
+        }
+
+        {
+            let element = document.createElement("a");
 
             if(level.has_content)
             {
