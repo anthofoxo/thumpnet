@@ -49,8 +49,9 @@ fetch("api/?resolve=user")
         let metdata = document.createElement("div");
 
         {
-            let element = document.createElement("h5");
+            let element = document.createElement("div");
             element.textContent = level.description;
+            element.style.cssText = 'font-style:italic;';
             metdata.appendChild(element);
         }
 

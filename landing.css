@@ -105,4 +105,5 @@ body>div:last-child
 {
     margin-left: 1em;
     grid-area: metadata;
+    color: #fff;
 }
