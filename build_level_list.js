@@ -18,7 +18,7 @@ fetch("api/?resolve=user")
 
         {
             let element = document.createElement("img");
-            if(level.thumb) element.src = "cdn/" + level.thumb;
+            if(level.thumb) element.src = "cdn/" + level.cdn + ".png";
             else
             {
                 element.src = "default_thumb.jpg";
@@ -94,7 +94,7 @@ fetch("api/?resolve=user")
             if(level.cdn)
             {
                 element.textContent = "Download";
-                element.href = "cdn/" + level.cdn;
+                element.href = "cdn/" + level.cdn + ".zip";
                 
             }
             else
