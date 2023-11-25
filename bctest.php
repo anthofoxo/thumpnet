@@ -1,7 +1,4 @@
 <?php
-$settings = parse_ini_file('api/config.ini', true);
-echo password_hash($settings["security"]["secretkey"] . $_GET["password"], PASSWORD_BCRYPT) . '<br>';
-
 function format_uuidv4($data)
 {
   assert(strlen($data) == 16);
@@ -13,5 +10,4 @@ function format_uuidv4($data)
 }
 
 echo format_uuidv4(random_bytes(16));
-
 ?>

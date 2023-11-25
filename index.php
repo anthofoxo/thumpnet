@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -15,12 +16,22 @@
     <body>
         <div>
             <span style="font-size: 2em;font-weight: bold;">ThumpNet</span>
-            <form onsubmit="return false;">
-                <input type="submit" value="Login / Logout (no-op)"></input>
-            </form>
-            <form onsubmit="return false;">
-                <input type="text" placeholder="Search (no-op)"></input>
-            </form>
+            <?php
+                if(isset($_SESSION["username"]))
+                {
+                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . " (" . htmlspecialchars($_SESSION["id"]) . ")</div>";
+
+                    echo "<form action=\"logout.php\">";
+                    echo "  <input type=\"submit\" value=\"Logout\"></input>";
+                    echo "</form>";
+                }
+                else
+                {
+                    echo "<form action=\"login.php\">";
+                    echo "  <input type=\"submit\" value=\"Login\"></input>";
+                    echo "</form>";
+                }
+            ?>
         </div>
         <div>
             ThumpNet is a custom level host for <a href="https://thumpergame.com/">Thumper</a>.

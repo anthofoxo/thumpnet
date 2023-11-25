@@ -1,11 +1,12 @@
-<?php // THIS FILE IS UNUSED
-session_start();
-session_destroy();
+<?php
+    session_start();
+    session_destroy();
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css"/>
+        <meta name="robots" content="noindex"/>
+        <meta http-equiv="refresh" content="0;url=/"/>
     </head>
     <body>
     </body>
