@@ -134,27 +134,6 @@ fetch("api/?resolve=user")
         metdata.appendChild(CreateLabeledText("Uploaded by", response.resolve.user[level.uploader]));
         metdata.appendChild(CreateLabeledText("Bpm", level.extra?.bpm));
         metdata.appendChild(CreateLabeledText("Num sublevels", level.extra?.sublevels));
-        
-        {
-            let element = document.createElement("a");
-            
-            element.style.display = "block";
-            element.style.padding = "0 0 2em 0";
-
-            if(level.has_content)
-            {
-                element.textContent = "Download";
-                element.href = "cdn/" + level.cdn + ".zip";
-                
-            }
-            else
-            {
-                element.textContent = "No Download Available";
-                element.style.color = "red";
-            }
-
-            metdata.appendChild(element);
-        }
 
         root.appendChild(metdata);
 
