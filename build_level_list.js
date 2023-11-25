@@ -38,11 +38,8 @@ fetch("api/?resolve=user")
         }
 
         {
-            let donwloadbutton = document.createElement("div");
-            donwloadbutton.className = "downloadbutton"
-
-            {
                 let element = document.createElement("a");
+                element.className = "downloadbutton"
 
                 if(level.has_content)
                 {
@@ -55,9 +52,7 @@ fetch("api/?resolve=user")
                     element.style.color = "red";
                 }
 
-                donwloadbutton.appendChild(element);
-            }
-            root.appendChild(donwloadbutton);
+                root.appendChild(element);
         }
 
         {
