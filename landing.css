@@ -34,7 +34,7 @@ body>div:last-child
     gap: .5em;
 }
 
-/* Level block */
+/* Level card */
 #levels>div
 {
     display:grid;
@@ -45,9 +45,10 @@ body>div:last-child
         "title title"
         "thumbnail metadata";
     
-    padding: .5em;
+    padding: .5rem;
+    gap: .5rem;
     background-color: #003;
-    border-radius: 1em;
+    border-radius: 1rem;
 
     /* Media query below will unset this if reduced motion is wanted */
     transition: background-color 0.1s;
@@ -90,6 +91,12 @@ body>div:last-child
     grid-area: title;
 }
 
+.level_description
+{
+    line-break: anywhere;
+    font-style: italic;
+}
+
 /* Level thumbnail */
 #levels>div>img
 {
@@ -103,7 +110,6 @@ body>div:last-child
 /* Level metadata */
 #levels>div>div:last-child
 {
-    margin-left: 1em;
     grid-area: metadata;
     color: #fff;
 }
