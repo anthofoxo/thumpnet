@@ -37,7 +37,7 @@ body>div:last-child
 /* Level card */
 #levels>div
 {
-    display:grid;
+    display: grid;
 
     grid-template-columns: 2fr 3fr;
     align-items: center;
@@ -85,7 +85,6 @@ body>div:last-child
 }
 
 /* Level title */
-/*#levels>div>div:first-child*/
 .level_title
 {
     grid-area: title;
@@ -98,7 +97,7 @@ body>div:last-child
 {
     grid-area: title;
     justify-self: left;
-    margin-top: -1.3em;
+    align-self: start;
 }
 
 .level_description
@@ -130,6 +129,8 @@ body>div:last-child
     width: 30%;
     margin: auto;
 
+    text-decoration: none;
+    font-weight: bold;
 
     background-color: #008;
     color: #fff;

@@ -8,20 +8,20 @@
     </head>
     <body>
         <div>
-            <span style="font-size:2em;font-weight:bold;">ThumpNet</span>
+            <a style="font-size:2em;font-weight:bold;display:block;color:var(--foreground-color);text-decoration:none;" href="/">ThumpNet</a>
             <?php
                 if(isset($_SESSION["username"]))
                 {
                     echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . " (" . htmlspecialchars($_SESSION["id"]) . ")</div>";
 
                     echo "<form action=\"logout.php\">";
-                    echo "  <input type=\"submit\" value=\"Logout\"/>";
+                    echo "    <input type=\"submit\" value=\"Logout\"/>";
                     echo "</form>";
                 }
                 else
                 {
                     echo "<form action=\"login.php\">";
-                    echo "  <input type=\"submit\" value=\"Login\"/>";
+                    echo "    <input type=\"submit\" value=\"Login\"/>";
                     echo "</form>";
                 }
             ?>
@@ -54,6 +54,10 @@
 
                     if(isset($row["difficulty"]))
                         echo "<div>D" . htmlspecialchars($row["difficulty"]) . "</div>";
+
+                    if($row["has_thumb"] == "1")
+                        echo "<img src=\"cdn/" . $row["cdn"] . ".png\"/>";
+
                     else
                         echo "<div>No difficulty</div>";
                 }
