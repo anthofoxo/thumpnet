@@ -34,13 +34,13 @@ fetch("api/?resolve=user")
         {
             let element = document.createElement("div");
             element.textContent = level.name;
-            element.className = "level_title"
+            element.classList.add("level_title");
             root.appendChild(element);
         }
 
         {
             let diffbadge = document.createElement("img");
-            diffbadge.className = "level_difficulty_badge";
+            diffbadge.classList.add("level_difficulty_badge");
             diffbadge.src = "images/D" + level.difficulty + ".png";
             diffbadge.alt = "D" + level.difficulty;
             root.appendChild(diffbadge);
@@ -48,7 +48,7 @@ fetch("api/?resolve=user")
 
         {
             let element = document.createElement("a");
-            element.className = "downloadbutton"
+            element.classList.add("downloadbutton");
 
             if(level.has_content)
             {
@@ -67,7 +67,7 @@ fetch("api/?resolve=user")
         {
 
             let element = document.createElement("img");
-            element.className = "stylinglevelimg";
+            element.classList.add("stylinglevelimg");
             element.src = "images/Loading.gif";
 
             if(level.has_thumb)
@@ -88,7 +88,7 @@ fetch("api/?resolve=user")
             }
             else
             {
-                element.src = "default_thumb.jpg";
+                element.src = "images/default_thumb.jpg";
                 element.alt = "Default thumbnail"
             }
 
