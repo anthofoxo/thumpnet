@@ -42,9 +42,9 @@ body>div:last-child
     grid-template-columns: 2fr 3fr;
     align-items: center;
     grid-template-areas:
-        "title title title"
-        "thumbnail metadata metadata"
-        "downloadbutton downloadbutton downloadbutton";
+        "title title"
+        "thumbnail metadata"
+        "downloadbutton downloadbutton";
     
     padding: .5rem;
     gap: .5rem;
