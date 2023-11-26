@@ -95,8 +95,8 @@ body>div:last-child
 
 .level_description
 {
-    line-break: anywhere;
     font-style: italic;
+    overflow-wrap: anywhere;
 }
 
 /* Level thumbnail */
