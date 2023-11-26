@@ -4,8 +4,8 @@
     <head>
         <?php include "metadata.html";?>
         <title>ThumpNet</title>
-        <link rel="preload" href="default_thumb.jpg" as="image"/>
-        <link rel="preload" href="Loading.gif" as="image"/>
+        <link rel="preload" href="images/default_thumb.jpg" as="image"/>
+        <link rel="preload" href="images/Loading.gif" as="image"/>
         <link rel="stylesheet" href="landing.css"/>
         <script src="build_level_list.js" defer></script>
     </head>

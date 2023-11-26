@@ -60,7 +60,7 @@ fetch("api/?resolve=user")
 
             let element = document.createElement("img");
             element.className = "stylinglevelimg";
-            element.src = "Loading.gif";
+            element.src = "images/Loading.gif";
 
             if(level.has_thumb)
             {
@@ -72,7 +72,7 @@ fetch("api/?resolve=user")
                 }
                 img.onerror = function()
                 {
-                    element.src = "default_thumb.jpg";
+                    element.src = "images/default_thumb.jpg";
                     element.alt = "Default thumbnail"
                 }
 
