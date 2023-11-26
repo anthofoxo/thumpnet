@@ -4,7 +4,6 @@
     <head>
         <?php include "metadata.html";?>
         <title>ThumpNet</title>
-        <link rel="preload" href="default_thumb.jpg" as="image"/>
         <link rel="stylesheet" href="landing.css"/>
     </head>
     <body>
@@ -46,12 +45,17 @@
 
                     $row = $result->fetch_assoc();
 
-                    if($row["uploader"] == $_SESSION["id"])
-                    {
-                        echo "You own this level :)<br>";
-                    }
+                    echo "<div>" . htmlspecialchars($row["name"]) . "</div>";
 
-                    echo $row["name"];
+                    if(isset($row["description"]))
+                        echo "<div>" . htmlspecialchars($row["description"]) . "</div>";
+                    else
+                        echo "<div>No description set</div>";
+
+                    if(isset($row["difficulty"]))
+                        echo "<div>D" . htmlspecialchars($row["difficulty"]) . "</div>";
+                    else
+                        echo "<div>No difficulty</div>";
                 }
             ?>
         </div>

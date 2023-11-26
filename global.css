@@ -12,14 +12,14 @@
 {
     font-family: Futura;
     font-weight: normal;
-    src: url(Futura_PT_Book.ttf);
+    src: url(fonts/Futura_PT_Book.ttf);
 }
 
 @font-face
 {
     font-family: Futura;
     font-weight: bold;
-    src: url(Futura_PT_Heavy.ttf);
+    src: url(fonts/Futura_PT_Heavy.ttf);
 }
 
 /* Make sure the html tag spans the entire height */

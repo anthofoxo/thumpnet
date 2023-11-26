@@ -34,6 +34,7 @@ fetch("api/?resolve=user")
         {
             let element = document.createElement("div");
             element.textContent = level.name;
+            element.className = "level_title"
             root.appendChild(element);
         }
 
@@ -59,7 +60,7 @@ fetch("api/?resolve=user")
 
             let element = document.createElement("img");
             element.className = "stylinglevelimg";
-            element.src = "Loading.gif";
+            element.src = "images/Loading.gif";
 
             if(level.has_thumb)
             {
@@ -71,7 +72,7 @@ fetch("api/?resolve=user")
                 }
                 img.onerror = function()
                 {
-                    element.src = "default_thumb.jpg";
+                    element.src = "images/default_thumb.jpg";
                     element.alt = "Default thumbnail"
                 }
 
@@ -129,6 +130,14 @@ fetch("api/?resolve=user")
         metdata.appendChild(CreateLabeledText("Uploaded by", response.resolve.user[level.uploader]));
         metdata.appendChild(CreateLabeledText("Bpm", level.extra?.bpm));
         metdata.appendChild(CreateLabeledText("Num sublevels", level.extra?.sublevels));
+        
+        {
+            let element = document.createElement("a");
+            element.style.display = "block";
+            element.textContent = "View";
+            element.href = "view.php?level=" + level.id;
+            metdata.appendChild(element);
+        }
 
         root.appendChild(metdata);
 

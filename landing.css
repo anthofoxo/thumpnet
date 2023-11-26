@@ -85,7 +85,8 @@ body>div:last-child
 }
 
 /* Level title */
-#levels>div>div:first-child
+/*#levels>div>div:first-child*/
+.level_title
 {
     grid-area: title;
     font-size: 2em;
@@ -95,8 +96,8 @@ body>div:last-child
 
 .level_description
 {
-    line-break: anywhere;
     font-style: italic;
+    overflow-wrap: anywhere;
 }
 
 /* Level thumbnail */
