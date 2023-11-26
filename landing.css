@@ -42,9 +42,9 @@ body>div:last-child
     grid-template-columns: 2fr 3fr;
     align-items: center;
     grid-template-areas:
-        "title title"
-        "thumbnail metadata"
-        "downloadbutton downloadbutton";
+        "title title title"
+        "thumbnail metadata metadata"
+        "downloadbutton downloadbutton downloadbutton";
     
     padding: .5rem;
     gap: .5rem;
@@ -92,6 +92,12 @@ body>div:last-child
     font-size: 2em;
     font-weight: bold;
     text-align: center;
+}
+
+.level_difficulty_badge
+{
+    grid-area: title;
+    justify-self: left;
 }
 
 .level_description

@@ -39,21 +39,29 @@ fetch("api/?resolve=user")
         }
 
         {
-                let element = document.createElement("a");
-                element.className = "downloadbutton"
+            let diffbadge = document.createElement("img");
+            diffbadge.className = "level_difficulty_badge";
+            diffbadge.src = "images/D" + level.difficulty + ".png";
+            diffbadge.alt = "D" + level.difficulty;
+            root.appendChild(diffbadge);
+        }
 
-                if(level.has_content)
-                {
-                    element.textContent = "Download";
-                    element.href = "cdn/" + level.cdn + ".zip";
-                }
-                else
-                {
-                    element.textContent = "No Download Available";
-                    element.style.color = "red";
-                }
+        {
+            let element = document.createElement("a");
+            element.className = "downloadbutton"
 
-                root.appendChild(element);
+            if(level.has_content)
+            {
+                element.textContent = "Download";
+                element.href = "cdn/" + level.cdn + ".zip";
+            }
+            else
+            {
+                element.textContent = "No Download Available";
+                element.style.color = "red";
+            }
+
+            root.appendChild(element);
         }
 
         {
