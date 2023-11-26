@@ -143,3 +143,12 @@ body>div:last-child
 {
     background-color: #00a;
 }
+
+/* Beeble */
+.beeble
+{
+    display: inline-block;
+    max-width: 3em;
+    max-height: 3em;
+    vertical-align: top;
+}

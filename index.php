@@ -8,10 +8,12 @@
         <link rel="preload" href="images/Loading.gif" as="image"/>
         <link rel="stylesheet" href="landing.css"/>
         <script src="build_level_list.js" defer></script>
+        <script src="beeble_functions.js" defer></script>
     </head>
     <body>
         <div>
             <span style="font-size: 2em;font-weight: bold;">ThumpNet</span>
+            <img src="images/beeble/beeble.png" class="beeble" id="beebleimage" alt="beeble" onclick="randomBeeble()">
             <?php
                 if(isset($_SESSION["username"]))
                 {
