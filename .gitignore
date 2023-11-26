@@ -1,3 +1,5 @@
 /be60068f-e7d9-4233-a769-8de8decfc8e9
 /cdn
 /api/config.ini
+
+!/cdn/.htaccess
