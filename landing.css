@@ -94,6 +94,12 @@ body>div:last-child
     text-align: center;
 }
 
+.level_difficulty_badge
+{
+    grid-area: title;
+    justify-self: left;
+}
+
 .level_description
 {
     font-style: italic;
@@ -136,4 +142,11 @@ body>div:last-child
 .downloadbutton:hover
 {
     background-color: #00a;
+}
+
+/* Beeble */
+.beeble
+{
+    display: inline-block;
+    vertical-align: top;
 }
