@@ -34,6 +34,7 @@ fetch("api/?resolve=user")
         {
             let element = document.createElement("div");
             element.textContent = level.name;
+            element.className = "level_title"
             root.appendChild(element);
         }
 
