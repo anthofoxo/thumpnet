@@ -138,24 +138,6 @@ fetch("api/?resolve=user")
             metdata.appendChild(element);
         }
 
-        {
-            let element = document.createElement("a");
-
-            if(level.has_content)
-            {
-                element.textContent = "Download";
-                element.href = "cdn/" + level.cdn + ".zip";
-                
-            }
-            else
-            {
-                element.textContent = "No Download Available";
-                element.style.color = "red";
-            }
-
-            metdata.appendChild(element);
-        }
-
         root.appendChild(metdata);
 
         container.appendChild(root);
