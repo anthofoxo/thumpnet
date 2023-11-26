@@ -13,7 +13,7 @@
     <body>
         <div>
             <span style="font-size: 2em;font-weight: bold;">ThumpNet</span>
-            <img src="images/beeble/beeble.png" class="beeble" id="beebleimage" alt="beeble" onclick="randomBeeble()">
+            <img src="images/beeble/beeble.png" width="50" height="40" class="beeble" id="beebleimage" alt="beeble" onclick="randomBeeble()">
             <?php
                 if(isset($_SESSION["username"]))
                 {
