@@ -41,7 +41,7 @@ fetch("api/?resolve=user")
         {
             let diffbadge = document.createElement("img");
             diffbadge.classList.add("level_difficulty_badge");
-            diffbadge.src = "images/D" + level.difficulty + ".png";
+            diffbadge.src = `images/D${level.difficulty}.png`;
             diffbadge.alt = "D" + level.difficulty;
             root.appendChild(diffbadge);
         }
@@ -53,7 +53,7 @@ fetch("api/?resolve=user")
             if(level.has_content)
             {
                 element.textContent = "Download";
-                element.href = "cdn/" + level.cdn + ".zip";
+                element.href = `cdn/${level.cdn}.zip`;
             }
             else
             {
@@ -84,7 +84,7 @@ fetch("api/?resolve=user")
                     element.alt = "Default thumbnail"
                 }
 
-                img.src = "cdn/" + level.cdn + ".png";
+                img.src = `cdn/${level.cdn}.png`;
             }
             else
             {
@@ -96,7 +96,7 @@ fetch("api/?resolve=user")
         }
 
         let metdata = document.createElement("div");
-        metdata.className = "stylinglevelmetadata";
+        metdata.classList.add("stylinglevelmetadata");
 
         // Level description
         {

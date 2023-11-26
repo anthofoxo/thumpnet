@@ -12,21 +12,21 @@
     </head>
     <body>
         <div>
-            <span style="font-size: 2em;font-weight: bold;">ThumpNet</span>
-            <img src="images/beeble/beeble.png" class="beeble" id="beebleimage" onclick="randomBeeble();">
+            <span style="font-size:2em;font-weight:bold;">ThumpNet</span>
+            <img src="images/beeble/beeble.png" class="beeble" id="beebleimage" onclick="randomBeeble();"/>
             <?php
                 if(isset($_SESSION["username"]))
                 {
                     echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . " (" . htmlspecialchars($_SESSION["id"]) . ")</div>";
 
                     echo "<form action=\"logout.php\">";
-                    echo "  <input type=\"submit\" value=\"Logout\"></input>";
+                    echo "  <input type=\"submit\" value=\"Logout\"/>";
                     echo "</form>";
                 }
                 else
                 {
                     echo "<form action=\"login.php\">";
-                    echo "  <input type=\"submit\" value=\"Login\"></input>";
+                    echo "  <input type=\"submit\" value=\"Login\"/>";
                     echo "</form>";
                 }
             ?>

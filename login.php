@@ -36,7 +36,9 @@
                     echo $redirect_success;
                 }
                 else
+                {
                     echo $redirect_failed;
+                }
 
                 unset($settings);
             }
@@ -45,15 +47,17 @@
         <?php include "metadata.html";?>
 
         <style>
-            body>div {
+            body>div
+            {
                 height: 100%;
-                display:flex;
+                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: .5em;
             }
-            form {
+            form
+            {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
