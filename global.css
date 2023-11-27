@@ -34,6 +34,7 @@ html
 /* Set the foreground and background colors */
 body
 {
+    margin: 0;
     height: 100%;
     background-color: var(--background-color);
     color: var(--foreground-color);

@@ -76,6 +76,7 @@
                     <input type="submit" value="Login"></input>
                     <input type="button" value="Cancel" onclick='window.location.href = "/";'></input>
                 </div>
+                To create an account see @anthofoxo on Discord.
             </form>
         </div>
         <script>
