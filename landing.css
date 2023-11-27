@@ -72,6 +72,10 @@ body>div:last-child
 /* Move thumbnails above the level information when too small */
 @media only screen and (max-width: 600px)
 {
+    #levels
+    {
+        grid-template-columns: 1fr;
+    }
     #levels>div
     {        
         justify-items: center;
@@ -119,7 +123,6 @@ body>div:last-child
 .stylinglevelmetadata
 {
     grid-area: metadata;
-    margin-left: 1em;
     color: #fff;
 }
 
