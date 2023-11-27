@@ -67,7 +67,9 @@
                             $user_lookup_result = $user_lookup->get_result();
                             $user_lookup_row = $user_lookup_result->fetch_assoc();
 
-                            echo htmlspecialchars($row["score"]) . " achieved by: " . htmlspecialchars($user_lookup_row["username"]) . "<br/>";
+                            
+                            echo number_format(intval($row["score"])) . " achieved by: " . htmlspecialchars($user_lookup_row["username"]) . "<br/>";
+
                             
                         }
                     }

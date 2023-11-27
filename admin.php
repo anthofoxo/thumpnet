@@ -107,59 +107,78 @@
 
                 $userid_lookup = array();
 
-                echo "<h3>Current users</h3>";
+                echo "<h3>Set password</h3>";
+                
+                echo "<form action=\"#\" method=\"POST\">";
+                echo "<input type=\"hidden\" name=\"what\" value=\"set_password\"/>";
+
+                echo "<label for=\"id\">User</label>";
+                echo "<select name=\"id\">";
+
                 for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
                 {
                     $result->data_seek($row_no);
                     $row = $result->fetch_assoc();
-
-                    echo $row["username"] . " (" . $row["permission_level"] . ")";
-
-                    echo "<form action=\"#\" method=\"POST\">";
-                    echo "<input type=\"password\" name=\"password\" placeholder=\"Set Password\"/>";
-                    echo "<input type=\"hidden\" name=\"what\" value=\"set_password\"/>";
-                    echo "<input type=\"hidden\" name=\"id\" value=\"" . $row["id"] . "\"/>";
-                    echo "</form>";
-                    
-                    echo "<br/>";
-
                     $userid_lookup[$row["id"]] = $row["username"];
+
+                    echo "  <option value=\"" . $row["id"] . "\">" . htmlspecialchars($row["username"]) . " (" . $row["permission_level"] . ")</option>";
                 }
+
+                echo "</select><br/>";
+
+                echo "<input type=\"password\" name=\"password\" placeholder=\"Set Password\"/>";
+                echo "<br/><input type=\"submit\"/>";
+
+                echo "</form>";
+
+                
 
                 echo "<h3>Add user</h3>";
                 echo "<form action=\"#\" method=\"POST\">";
                 echo "<input type=\"text\" name=\"username\" placeholder=\"Add User\"/>";
                 echo "<input type=\"hidden\" name=\"what\" value=\"add_user\"/>";
+                echo "<br/><input type=\"submit\"/>";
                 echo "</form>";
 
                 $result = $mysqli->query("SELECT * FROM `levels`");
 
-                echo "<h3>Current levels</h3>";
+                // ADD SCORE
+
+                echo "<h3>Add score</h3>";
+
+                echo "<form action=\"#\" method=\"POST\">";
+
+                echo "<input type=\"hidden\" name=\"what\" value=\"add_score\"/>";
+
+                echo "<label for=\"level\">Level</label>";
+                echo "<select name=\"level\">";
+
                 for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
                 {
                     $result->data_seek($row_no);
                     $row = $result->fetch_assoc();
+                    echo "    <option value=\"" . $row["id"] . "\">" . htmlspecialchars($row["name"]) . " (" . htmlspecialchars($userid_lookup[$row["uploader"]]) . ")</option>";
+                }
+                        
+                echo "</select><br/>";
 
-                    echo $row["name"] . " (" . $userid_lookup[$row["uploader"]] . ")<br/>";
-
-
-                    echo "Add score";
-                    echo "<form action=\"#\" method=\"POST\">";
-                    
-                    echo "<select name=\"user\">";
+                echo "<label for=\"user\">User</label>";
+                echo "<select name=\"user\">";
                     foreach($userid_lookup as $id => $username)
                         echo "  <option value=\"" . $id . "\">" . $username . "</option>";
-                    echo "</select>";
+                echo "</select><br/>";
 
-                    echo "<input type=\"number\" name=\"score\"/>";
+                
+                echo "<label for=\"score\">Score</label>";
+                echo "<input type=\"number\" name=\"score\" placeholder=\"score\"/><br/>";
 
-                    echo "<input type=\"checkbox\" name=\"playplus\"/>";
+                echo "<label for=\"playplus\">Play plus?</label>";
+                echo "<input type=\"checkbox\" name=\"playplus\"/><br/>";
+                echo "<input type=\"submit\"/>";
 
-                    echo "<input type=\"hidden\" name=\"level\" value=\"" . $row["id"] . "\"/>";
+                echo "</form>";
 
-                    echo "<input type=\"hidden\" name=\"what\" value=\"add_score\"/>";
-                    echo "</form>";
-                }
+                // END ADD SCORE
             ?>
         </div>
     </body>
