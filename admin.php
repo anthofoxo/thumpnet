@@ -66,19 +66,20 @@
                 if("add_score" == $_POST["what"])
                 {
                     
+                    $playplus = isset($_POST["playplus"]) ? "1" : "0";
     
                     $stmt = $mysqli->prepare("INSERT INTO `scores` (`user`, `level`, `score`, `playplus`) VALUES (?, ?, ?, ?)");
-                    $stmt->bind_param("iiii", $_POST["user"], $_POST["level"], $_POST["score"], $_POST["playplus"]);
+                    $stmt->bind_param("iiii", $_POST["user"], $_POST["level"], $_POST["score"], $playplus);
                     if(!$stmt->execute())
                     {
                         echo "<h1>Operation Failed</h1>";
-                        echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
-                        exit;
+                        //echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
+                        //exit;
                     }
                     else
                     {
-                        echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
-                        exit;
+                        //echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
+                        //exit;
                     }
                 }
             }
