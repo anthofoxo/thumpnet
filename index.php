@@ -6,38 +6,12 @@
         <title>ThumpNet</title>
         <link rel="preload" href="images/default_thumb.jpg" as="image"/>
         <link rel="preload" href="images/Loading.gif" as="image"/>
+        <link rel="stylesheet" href="layout.css"/>
         <link rel="stylesheet" href="landing.css"/>
         <script src="build_level_list.js" defer></script>
-        <script src="beeble_functions.js" defer></script>
     </head>
     <body>
-        <div>
-            <span style="font-size:2em;font-weight:bold;">ThumpNet</span>
-            <img src="images/beeble/beeble.png" class="beeble" id="beebleimage" onclick="randomBeeble();"/>
-            <?php
-                if(isset($_SESSION["id"]))
-                {
-                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . "</div>";
-
-                    echo "<form action=\"logout.php\">";
-                    echo "  <input type=\"submit\" value=\"Logout\"/>";
-                    echo "</form>";
-
-                    if($_SESSION["permission_level"] > 0)
-                    {
-                        echo "<form action=\"admin.php\">";
-                        echo "  <input type=\"submit\" value=\"Admin\"/>";
-                        echo "</form>";
-                    }
-                }
-                else
-                {
-                    echo "<form action=\"login.php\">";
-                    echo "  <input type=\"submit\" value=\"Login\"/>";
-                    echo "</form>";
-                }
-            ?>
-        </div>
+        <?php include "header.php";?>
         <div>
             <div style="margin-bottom:8px;">
                 ThumpNet is a custom level host for <a href="https://thumpergame.com/">Thumper</a>.

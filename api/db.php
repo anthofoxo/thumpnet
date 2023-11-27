@@ -1,5 +1,4 @@
 <?php
-$settings = parse_ini_file('config.ini', true);
-$mysqli = new mysqli($settings['db']['hostname'], $settings['db']['username'], $settings['db']['password'], $settings['db']['database']);
-unset($settings);
+$config = parse_ini_file("config.ini", true);
+$mysqli = new mysqli($config["db"]["hostname"], $config["db"]["username"], $config["db"]["password"], $config["db"]["database"]);
 ?>

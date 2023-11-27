@@ -70,3 +70,15 @@ a
 {
     background: #555;
 }
+
+/* Global because its in the header */
+.beeble
+{
+    display: inline-block;
+    vertical-align: top;
+    min-width: 4em;
+    min-height: 3em;
+    max-width: 4em;
+    max-height: 3em;
+    cursor: pointer;
+}

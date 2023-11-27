@@ -3,8 +3,8 @@
 <html lang="en-US">
     <head>
         <?php include "metadata.html";?>
-        <title>ThumpNet Admin</title>
-        <link rel="stylesheet" href="landing.css"/>
+        <link rel="stylesheet" href="layout.css"/>
+        <meta name="robots" content="noindex"/>
         <?php
             if(!isset($_SESSION["id"]))
             {
@@ -23,9 +23,7 @@
             {
                 if("set_password" == $_POST["what"])
                 {
-                    $settings = parse_ini_file('api/config.ini', true);
-                    $hashed = password_hash($settings["security"]["secretkey"] . $_POST["password"], PASSWORD_BCRYPT);
-                    unset($settings);
+                    $hashed = password_hash($config["security"]["secretkey"] . $_POST["password"], PASSWORD_BCRYPT);
     
                     $stmt = $mysqli->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
                     $stmt->bind_param("si", $hashed, $_POST["id"]);
@@ -73,13 +71,13 @@
                     if(!$stmt->execute())
                     {
                         echo "<h1>Operation Failed</h1>";
-                        //echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
-                        //exit;
+                        echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
+                        exit;
                     }
                     else
                     {
-                        //echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
-                        //exit;
+                        echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
+                        exit;
                     }
                 }
             }
@@ -87,25 +85,7 @@
         ?>
     </head>
     <body>
-        <div>
-            <a style="font-size:2em;font-weight:bold;display:block;color:var(--foreground-color);text-decoration:none;" href="/">ThumpNet</a>
-            <?php
-                if(isset($_SESSION["username"]))
-                {
-                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . "</div>";
-
-                    echo "<form action=\"logout.php\">";
-                    echo "    <input type=\"submit\" value=\"Logout\"/>";
-                    echo "</form>";
-                }
-                else
-                {
-                    echo "<form action=\"login.php\">";
-                    echo "    <input type=\"submit\" value=\"Login\"/>";
-                    echo "</form>";
-                }
-            ?>
-        </div>
+        <?php include "header.php";?>
         <div>
             <?php
                 // !!! NO NOT ATTEMPT TO EXECUTE ANY OF THIS CODE OF YOU ARENT AN ADMIN AND LOGGED IN !!!

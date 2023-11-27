@@ -1,0 +1,28 @@
+/* Applies basic layout to standard pages,
+These are all pages except the login page */
+
+html
+{
+    overflow: hidden;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+body>div:first-child
+{
+    padding: 8px;
+    border-bottom: 1px solid var(--foreground-color);
+}
+
+/* Content */
+body>div:last-child
+{
+    padding: 8px;
+    flex-grow: 1;
+    overflow: auto;
+}

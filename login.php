@@ -1,9 +1,9 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+        <meta name="robots" content="noindex"/>
         <?php
-            session_start();
-
             $redirect_success = "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
             $redirect_failed = "<meta http-equiv=\"refresh\" content=\"0;url=?status=failed\"/>";
 
@@ -26,10 +26,8 @@
                     exit;
                 }
                 $row = $result->fetch_assoc();
-    
-                $settings = parse_ini_file("api/config.ini", true);
                 
-                if(password_verify($settings["security"]["secretkey"] . $_POST["password"], $row["password"]))
+                if(password_verify($config["security"]["secretkey"] . $_POST["password"], $row["password"]))
                 {
                     $_SESSION["id"] = $row["id"];
                     $_SESSION["username"] = $row["username"];
@@ -40,8 +38,6 @@
                 {
                     echo $redirect_failed;
                 }
-
-                unset($settings);
             }
         ?>
 
@@ -77,7 +73,7 @@
                     <input type="submit" value="Login"></input>
                     <input type="button" value="Cancel" onclick='window.location.href = "/";'></input>
                 </div>
-                To create an account see @anthofoxo on Discord.
+                <span>To create an account see <a href="discord://-/users/218415631479996417">@anthofoxo</a> on Discord.</span>
             </form>
         </div>
         <script>

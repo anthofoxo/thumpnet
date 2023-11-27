@@ -3,32 +3,11 @@
 <html lang="en-US">
     <head>
         <?php include "metadata.html";?>
-        <title>ThumpNet</title>
+        <link rel="stylesheet" href="layout.css"/>
         <link rel="stylesheet" href="landing.css"/>
-        <style>
-            
-        </style>
     </head>
     <body>
-        <div>
-            <a style="font-size:2em;font-weight:bold;display:block;color:var(--foreground-color);text-decoration:none;" href="/">ThumpNet</a>
-            <?php
-                if(isset($_SESSION["username"]))
-                {
-                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . "</div>";
-
-                    echo "<form action=\"logout.php\">";
-                    echo "    <input type=\"submit\" value=\"Logout\"/>";
-                    echo "</form>";
-                }
-                else
-                {
-                    echo "<form action=\"login.php\">";
-                    echo "    <input type=\"submit\" value=\"Login\"/>";
-                    echo "</form>";
-                }
-            ?>
-        </div>
+        <?php include "header.php"?>
         <div>
             <?php
                 if(isset($_GET["level"]))
@@ -92,23 +71,6 @@
                             
                         }
                     }
-
-                    
-        
-
-                    //echo "<form>";
-                    //if (isset($_SESSION["id"]))
-                    //{
-                    //    echo "<input type=\"text\" name=\"score\" placeholder=\"score\"/><br/>";
-                    //    echo "<input type=\"text\" name=\"evidence\" title=\"url to image or screenshot showing your score\" placeholder=\"evidence\"/><br/>";
-                    //    echo "<input type=\"hidden\" name=\"level\" value=\"" . $_GET["level"] . "\"/>";
-                    //    echo "<input type=\"hidden\" name=\"user\" value=\"" . $_SESSION["id"]. "\"/>";
-                    //    echo "<input type=\"submit\" value=\"Submit Score\"/>";
-                    //}
-                    //else 
-                    //    echo "<input type=\"submit\" value=\"Submit Score\" title=\"Login to submit a score\" disabled/>";
-                    //
-                    //echo "</form>";
                 }
             ?>
         </div>
