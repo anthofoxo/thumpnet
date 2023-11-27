@@ -15,13 +15,20 @@
             <span style="font-size:2em;font-weight:bold;">ThumpNet</span>
             <img src="images/beeble/beeble.png" class="beeble" id="beebleimage" onclick="randomBeeble();"/>
             <?php
-                if(isset($_SESSION["username"]))
+                if(isset($_SESSION["id"]))
                 {
-                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . " (" . htmlspecialchars($_SESSION["id"]) . ")</div>";
+                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . "</div>";
 
                     echo "<form action=\"logout.php\">";
                     echo "  <input type=\"submit\" value=\"Logout\"/>";
                     echo "</form>";
+
+                    if($_SESSION["permission_level"] > 0)
+                    {
+                        echo "<form action=\"admin.php\">";
+                        echo "  <input type=\"submit\" value=\"Admin\"/>";
+                        echo "</form>";
+                    }
                 }
                 else
                 {

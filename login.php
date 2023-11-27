@@ -16,7 +16,7 @@
             if(isset($_POST["username"]))
             {
                 include "api/db.php";
-                $stmt = $mysqli->prepare("SELECT `id`,`username`,`password` FROM `users` WHERE `username` = ?");
+                $stmt = $mysqli->prepare("SELECT * FROM `users` WHERE `username` = ?");
                 $stmt->bind_param("s", $_POST["username"]);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -33,6 +33,7 @@
                 {
                     $_SESSION["id"] = $row["id"];
                     $_SESSION["username"] = $row["username"];
+                    $_SESSION["permission_level"] = $row["permission_level"];
                     echo $redirect_success;
                 }
                 else

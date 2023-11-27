@@ -15,7 +15,7 @@
             <?php
                 if(isset($_SESSION["username"]))
                 {
-                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . " (" . htmlspecialchars($_SESSION["id"]) . ")</div>";
+                    echo "<div>Logged in as: " . htmlspecialchars($_SESSION["username"]) . "</div>";
 
                     echo "<form action=\"logout.php\">";
                     echo "    <input type=\"submit\" value=\"Logout\"/>";
