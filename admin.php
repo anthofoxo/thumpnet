@@ -11,7 +11,7 @@
                 echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
                 exit;
             }
-            if($_SESSION["permission_level"] <= 0)
+            if($_SESSION["permission_level"] < 4)
             {
                 echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
                 exit;
@@ -94,7 +94,7 @@
                     echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
                     exit;
                 }
-                if($_SESSION["permission_level"] <= 0)
+                if($_SESSION["permission_level"] < 4)
                 {
                     echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
                     exit;

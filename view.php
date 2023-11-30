@@ -44,6 +44,25 @@
                         echo "<div>No difficulty</div>";
 
                  
+                    // Show submit score form if logged in
+                    if(isset($_SESSION["id"]))
+                    {
+                        echo "<form action=\"submit_score.php?url=" . urlencode($_SERVER["REQUEST_URI"]) . "\" method=\"POST\">";
+                        echo "<input type=\"number\" name=\"score\" placeholder=\"Score\"/>";
+                        echo "<input type=\"url\"    name=\"evidence\" placeholder=\"Evidence\"/>";
+                        echo "Playplus?";
+                        echo "<input type=\"checkbox\" name=\"playplus\"/>";
+                        echo "<input type=\"hidden\" name=\"level\" value=\"" . $_GET["level"] . "\"/>";
+                        echo "<input type=\"submit\"/>";
+
+                        if(isset($_GET["status"]))
+                        {
+                            echo $_GET["status"];
+                        }
+
+                        echo "</form>";
+                    }
+
 
                     $stmt = $mysqli->prepare("SELECT * from `scores` WHERE `level` = ? ORDER BY `score` DESC");
                     $stmt->bind_param("i", $_GET["level"]);
