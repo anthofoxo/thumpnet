@@ -1,0 +1,47 @@
+{{#levels}}
+<div>
+    <div class="level_title">{{name}}</div>
+    <img class="level_difficulty_badge" src="images/D{{difficulty}}.png" alt="D{{difficulty}}"/>
+
+    {{#has_content}}
+    <a class="downloadbutton" href="cdn/{{cdn}}.zip">Download</a>
+    {{/has_content}}
+
+    {{^has_content}}
+    <a class="downloadbutton" style="color:red;">No Download Available</a>
+    {{/has_content}}
+
+    {{#has_thumb}}
+    <img class="stylinglevelimg" src="cdn/{{cdn}}.png"/>
+    {{/has_thumb}}
+    
+    {{^has_thumb}}
+    <img class="stylinglevelimg" src="images/default_thumb.jpg"/>
+    {{/has_thumb}}
+
+    <div class="stylinglevelmetadata">
+
+        <div class="level_description">{{description}}</div>
+
+        <div>
+            <span style="font-weight:bold;">Difficulty: </span>
+            <img class="level_difficulty_badge" src="images/D{{difficulty}}.png" alt="D{{difficulty}}"/>
+            <span>D{{difficulty}}</span>
+        </div>
+
+        <span style="font-weight:bold;">Authors: </span><span>{{authors}}</span>
+
+        <div><span style="font-weight:bold;">Uploaded by: </span><span>{{uploader}}</span></div>
+
+        {{#extra.bpm}}
+        <div><span style="font-weight:bold;">Bpm: </span><span>{{extra.bpm}}</span></div>
+        {{/extra.bpm}}
+
+        {{#extra.sublevels}}
+        <div><span style="font-weight:bold;">Num sublevels: </span><span>{{extra.sublevels}}</span></div>
+        {{/extra.sublevels}}
+
+        <a style="display:block;" href="view.php?level={{id}}">View</a>
+    </div>
+</div>
+{{/levels}}
