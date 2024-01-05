@@ -85,7 +85,10 @@
         ?>
     </head>
     <body>
-        <?php include "header.php";?>
+        <div>
+            <div hx-get="/detail/title.html" hx-trigger="load"></div>
+            <div id="header" hx-get="/detail/subtitle.php" hx-trigger="load"></div>
+        </div>
         <div>
             <?php
                 // !!! NO NOT ATTEMPT TO EXECUTE ANY OF THIS CODE OF YOU ARENT AN ADMIN AND LOGGED IN !!!

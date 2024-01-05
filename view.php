@@ -7,7 +7,10 @@
         <link rel="stylesheet" href="landing.css"/>
     </head>
     <body>
-        <?php include "header.php"?>
+        <div>
+            <div hx-get="/detail/title.html" hx-trigger="load"></div>
+            <div id="header" hx-get="/detail/subtitle.php" hx-trigger="load"></div>
+        </div>
         <div>
             <?php
                 if(isset($_GET["level"]))

@@ -20,15 +20,10 @@
         <script src="/include.js" data-fetch="/card-template.mustache" data-target="level-cards"></script>
     </head>
     <body>
-        <?php include "header.php";?>
         <div>
-            <zero-md src="/about.md">
-                <template>
-                    <link rel="stylesheet" href="/global.css"/>
-                </template>
-            </zero-md>
-            
-            <div id="levels" hx-ext="thumpnet-client-side-templates" hx-get="/api/?resolve=user" hx-trigger="load" thumpnet-template="level-cards"></div>
+            <div hx-get="/detail/title.html" hx-trigger="load"></div>
+            <div id="header" hx-get="/detail/subtitle.php" hx-trigger="load"></div>
         </div>
+        <div id="content" hx-get="landing.html" hx-trigger="load"></div>
     </body>
 </html>
