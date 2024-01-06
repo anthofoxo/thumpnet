@@ -44,6 +44,7 @@ body
 a
 {
     color: #5f5fff;
+    cursor: pointer;
 }
 
 /* Scrollbar styling, webkit only */

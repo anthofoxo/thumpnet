@@ -1,102 +1,91 @@
-<?php session_start();?>
-<!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <?php include "metadata.html";?>
-        <link rel="stylesheet" href="layout.css"/>
-        <link rel="stylesheet" href="landing.css"/>
-    </head>
-    <body>
-        <div>
-            <div hx-get="/detail/title.html" hx-trigger="load"></div>
-            <div id="header" hx-get="/detail/subtitle.php" hx-trigger="load"></div>
-        </div>
-        <div>
-            <?php
-                if(isset($_GET["level"]))
-                {
-                    include "api/db.php";
+<?php
+session_start();
+if(isset($_GET["level"]))
+{
+    include "api/db.php";
 
-                    $stmt = $mysqli->prepare("SELECT * FROM `levels` WHERE `id` = ?");
-                    $stmt->bind_param("i", $_GET["level"]);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+    $stmt = $mysqli->prepare("SELECT * FROM `levels` WHERE `id` = ?");
+    $stmt->bind_param("i", $_GET["level"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-                    if($result->num_rows != 1)
-                    {
-                        echo "Invalid level";
-                        exit;
-                    }
+    if($result->num_rows != 1)
+    {
+        echo "Invalid level";
+        exit;
+    }
 
-                    $row = $result->fetch_assoc();
+    $row = $result->fetch_assoc();
 
-                    echo "<div>" . htmlspecialchars($row["name"]) . "</div>";
+    // If you own the level, offer a delete button
+    if (isset($_SESSION["id"]) && $row["uploader"] == $_SESSION["id"]) {
+        echo 'You own this level';
+    }
 
-                    if(isset($row["description"]))
-                        echo "<div>" . htmlspecialchars($row["description"]) . "</div>";
-                    else
-                        echo "<div>No description set</div>";
+    echo "<div>" . htmlspecialchars($row["name"]) . "</div>";
 
-                    if(isset($row["difficulty"]))
-                        echo "<div>D" . htmlspecialchars($row["difficulty"]) . "</div>";
+    if(isset($row["description"]))
+        echo "<div>" . htmlspecialchars($row["description"]) . "</div>";
+    else
+        echo "<div>No description set</div>";
 
-                    if($row["has_thumb"] == "1")
-                        echo "<img src=\"cdn/" . $row["cdn"] . ".png\"/><br/>";
+    if(isset($row["difficulty"]))
+        echo "<div>D" . htmlspecialchars($row["difficulty"]) . "</div>";
 
-                    else
-                        echo "<div>No difficulty</div>";
+    if($row["has_thumb"] == "1")
+        echo "<img src=\"cdn/" . $row["cdn"] . ".png\"/><br/>";
 
-                 
-                    // Show submit score form if logged in
-                    if(isset($_SESSION["id"]))
-                    {
-                        echo "<form action=\"submit_score.php?url=" . urlencode($_SERVER["REQUEST_URI"]) . "\" method=\"POST\">";
-                        echo "<input type=\"number\" name=\"score\" placeholder=\"Score\"/>";
-                        echo "<input type=\"url\"    name=\"evidence\" placeholder=\"Evidence\"/>";
-                        echo "Playplus?";
-                        echo "<input type=\"checkbox\" name=\"playplus\"/>";
-                        echo "<input type=\"hidden\" name=\"level\" value=\"" . $_GET["level"] . "\"/>";
-                        echo "<input type=\"submit\"/>";
+    else
+        echo "<div>No difficulty</div>";
 
-                        if(isset($_GET["status"]))
-                        {
-                            echo $_GET["status"];
-                        }
+    
+    // Show submit score form if logged in
+    if(isset($_SESSION["id"]))
+    {
+        echo "<form action=\"submit_score.php?url=" . urlencode($_SERVER["REQUEST_URI"]) . "\" method=\"POST\">";
+        echo "<input type=\"number\" name=\"score\" placeholder=\"Score\"/>";
+        echo "<input type=\"url\"    name=\"evidence\" placeholder=\"Evidence\"/>";
+        echo "Playplus?";
+        echo "<input type=\"checkbox\" name=\"playplus\"/>";
+        echo "<input type=\"hidden\" name=\"level\" value=\"" . $_GET["level"] . "\"/>";
+        echo "<input type=\"submit\"/>";
 
-                        echo "</form>";
-                    }
+        if(isset($_GET["status"]))
+        {
+            echo $_GET["status"];
+        }
+
+        echo "</form>";
+    }
 
 
-                    $stmt = $mysqli->prepare("SELECT * from `scores` WHERE `level` = ? ORDER BY `score` DESC");
-                    $stmt->bind_param("i", $_GET["level"]);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    if($result->num_rows == 0)
-                    {
-                        echo "No scores submitted";
-                        exit;
-                    }
-                    else
-                    {
-                        echo "Top scores<br/>";
-                        for($i = 0; $i < $result->num_rows; $i++)
-                        {
-                            $row = $result->fetch_assoc();
+    $stmt = $mysqli->prepare("SELECT * from `scores` WHERE `level` = ? ORDER BY `score` DESC");
+    $stmt->bind_param("i", $_GET["level"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows == 0)
+    {
+        echo "No scores submitted";
+        exit;
+    }
+    else
+    {
+        echo "Top scores<br/>";
+        for($i = 0; $i < $result->num_rows; $i++)
+        {
+            $row = $result->fetch_assoc();
 
-                            $user_lookup = $mysqli->prepare("SELECT `username` from `users` WHERE `id` = ?");
-                            $user_lookup->bind_param("i", $row["user"]);
-                            $user_lookup->execute();
-                            $user_lookup_result = $user_lookup->get_result();
-                            $user_lookup_row = $user_lookup_result->fetch_assoc();
+            $user_lookup = $mysqli->prepare("SELECT `username` from `users` WHERE `id` = ?");
+            $user_lookup->bind_param("i", $row["user"]);
+            $user_lookup->execute();
+            $user_lookup_result = $user_lookup->get_result();
+            $user_lookup_row = $user_lookup_result->fetch_assoc();
 
-                            
-                            echo number_format(intval($row["score"])) . " achieved by: " . htmlspecialchars($user_lookup_row["username"]) . "<br/>";
+            
+            echo number_format(intval($row["score"])) . " achieved by: " . htmlspecialchars($user_lookup_row["username"]) . "<br/>";
 
-                            
-                        }
-                    }
-                }
-            ?>
-        </div>
-    </body>
-</html>
+            
+        }
+    }
+}
+?>

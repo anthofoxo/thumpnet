@@ -1,7 +1,7 @@
 <?php
 include "db.php";
 
-$result = $mysqli->query("SELECT * FROM levels");
+$result = $mysqli->query("SELECT * FROM levels ORDER BY id DESC");
 
 $should_resolve_users = isset($_GET["resolve"]) && $_GET["resolve"] == "user";
 

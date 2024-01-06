@@ -8,12 +8,12 @@
         <?php
             if(!isset($_SESSION["id"]))
             {
-                echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                echo '<meta http-equiv="refresh" content="0;url=/"/>';
                 exit;
             }
             if($_SESSION["permission_level"] < 4)
             {
-                echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                echo '<meta http-equiv="refresh" content="0;url=/"/>';
                 exit;
             }
 
@@ -29,13 +29,13 @@
                     $stmt->bind_param("si", $hashed, $_POST["id"]);
                     if(!$stmt->execute())
                     {
-                        echo "<h1>Operation Failed</h1>";
-                        echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
+                        echo '<h1>Operation Failed</h1>';
+                        echo '<meta http-equiv="refresh" content="5"/>';
                         exit;
                     }
                     else
                     {
-                        echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
+                        echo '<meta http-equiv="refresh" content="0"/>';
                         exit;
                     }
                 }
@@ -48,13 +48,13 @@
                     $stmt->bind_param("s", $_POST["username"]);
                     if(!$stmt->execute())
                     {
-                        echo "<h1>Operation Failed</h1>";
-                        echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
+                        echo '<h1>Operation Failed</h1>';
+                        echo '<meta http-equiv="refresh" content="5"/>';
                         exit;
                     }
                     else
                     {
-                        echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
+                        echo '<meta http-equiv="refresh" content="0"/>';
                         exit;
                     }
 
@@ -70,13 +70,13 @@
                     $stmt->bind_param("iiii", $_POST["user"], $_POST["level"], $_POST["score"], $playplus);
                     if(!$stmt->execute())
                     {
-                        echo "<h1>Operation Failed</h1>";
-                        echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
+                        echo '<h1>Operation Failed</h1>';
+                        echo '<meta http-equiv="refresh" content="5"/>';
                         exit;
                     }
                     else
                     {
-                        echo "<meta http-equiv=\"refresh\" content=\"0\"/>";
+                        echo '<meta http-equiv="refresh" content="0"/>';
                         exit;
                     }
                 }
@@ -94,12 +94,12 @@
                 // !!! NO NOT ATTEMPT TO EXECUTE ANY OF THIS CODE OF YOU ARENT AN ADMIN AND LOGGED IN !!!
                 if(!isset($_SESSION["id"]))
                 {
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                    echo '<meta http-equiv="refresh" content="0;url=/"/>';
                     exit;
                 }
                 if($_SESSION["permission_level"] < 4)
                 {
-                    echo "<meta http-equiv=\"refresh\" content=\"0;url=/\"/>";
+                    echo '<meta http-equiv="refresh" content="0;url=/"/>';
                     exit;
                 }
 
@@ -112,11 +112,11 @@
 
                 echo "<h3>Set password</h3>";
                 
-                echo "<form action=\"#\" method=\"POST\">";
-                echo "<input type=\"hidden\" name=\"what\" value=\"set_password\"/>";
+                echo '<form action="#" method="POST">';
+                echo '<input type="hidden" name="what" value="set_password"/>';
 
-                echo "<label for=\"id\">User</label>";
-                echo "<select name=\"id\">";
+                echo '<label for="id">User</label>';
+                echo '<select name="id">';
 
                 for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
                 {
@@ -127,34 +127,29 @@
                     echo "  <option value=\"" . $row["id"] . "\">" . htmlspecialchars($row["username"]) . " (" . $row["permission_level"] . ")</option>";
                 }
 
-                echo "</select><br/>";
+                echo '</select><br/>';
 
-                echo "<input type=\"password\" name=\"password\" placeholder=\"Set Password\"/>";
-                echo "<br/><input type=\"submit\"/>";
+                echo '<input type="password" name="password" placeholder="Set Password"/>';
+                echo '<br/><input type="submit"/>';
 
-                echo "</form>";
+                echo '</form>';
 
-                
-
-                echo "<h3>Add user</h3>";
-                echo "<form action=\"#\" method=\"POST\">";
-                echo "<input type=\"text\" name=\"username\" placeholder=\"Add User\"/>";
-                echo "<input type=\"hidden\" name=\"what\" value=\"add_user\"/>";
-                echo "<br/><input type=\"submit\"/>";
-                echo "</form>";
+                echo '<h3>Add user</h3>';
+                echo '<form action="#" method="POST">';
+                echo '<input type="text" name="username" placeholder="Add User"/>';
+                echo '<input type="hidden" name="what" value="add_user"/>';
+                echo '<br/><input type="submit"/>';
+                echo '</form>';
 
                 $result = $mysqli->query("SELECT * FROM `levels`");
 
                 // ADD SCORE
 
-                echo "<h3>Add score</h3>";
-
-                echo "<form action=\"#\" method=\"POST\">";
-
-                echo "<input type=\"hidden\" name=\"what\" value=\"add_score\"/>";
-
-                echo "<label for=\"level\">Level</label>";
-                echo "<select name=\"level\">";
+                echo '<h3>Add score</h3>';
+                echo '<form action="#" method="POST">';
+                echo '<input type="hidden" name="what" value="add_score"/>';
+                echo '<label for="level">Level</label>';
+                echo '<select name="level">';
 
                 for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
                 {

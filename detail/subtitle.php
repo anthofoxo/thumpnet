@@ -11,6 +11,8 @@ if(isset($_SESSION["id"]))
         echo "</form>";
     }
 
+    echo '<button hx-get="/upload_level.html" hx-target="#content">Upload Level</button>';
+
     // We want a full page reload here, this will ensure anything with higher level accesses not be shown
     echo '<form action="logout.php">';
     echo "    <input type=\"submit\" value=\"Logout\"/>";

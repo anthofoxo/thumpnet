@@ -1,0 +1,39 @@
+<form enctype="multipart/form-data" hx-encoding="multipart/form-data" hx-post="/query/upload_level.php">
+  <div>
+    <label for="level_name">Level name</label>
+    <input id="level_name" name="level_name" type="text"></input>
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <input id="description" name="description" type="text"></input>
+  </div>
+  <div>
+    <label for="thumbnail">Thumbnail</label>
+    <input id="thumbnail" name="thumbnail" type="file"></input>
+  </div>
+  <div>
+    <label for="difficulty">Difficulty</label>
+    <input id="difficulty" name="difficulty" type="number"></input>
+  </div>
+  <div>
+    <label for="content">Content (.zip)</label>
+    <input id="content" name="content" type="file"></input>
+  </div>
+  <div>
+    <label for="sublevels">Number of sublevels</label>
+    <input id="sublevels" type="number"></input>
+  </div>
+  <div>
+    <label for="bpm">Bpm</label>
+    <input id="bpm" type="number"></input>
+  </div>
+  <div>
+    <label for="authors">Author(s)</label>
+    <input id="authors" name="authors" type="text"></input>
+  </div>
+  <div>
+    <label for="song">Original song</label>
+    <input id="song" type="text"></input>
+  </div>
+  <input type="submit"></input>
+</form>

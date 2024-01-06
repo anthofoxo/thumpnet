@@ -41,7 +41,7 @@
         <div><span style="font-weight:bold;">Num sublevels: </span><span>{{extra.sublevels}}</span></div>
         {{/extra.sublevels}}
 
-        <a style="display:block;" href="view.php?level={{id}}">View</a>
+        <a style="display:block;" hx-get="view.php?level={{id}}" hx-target="#content" hx-push-url="true">View</a>
     </div>
 </div>
 {{/levels}}
