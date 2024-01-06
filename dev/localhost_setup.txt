@@ -43,11 +43,10 @@ CREATE DATABASE `databasename`;
 USE `databasename`;
 CREATE TABLE `users` (`id` INT NOT NULL AUTO_INCREMENT, `username` VARCHAR(32) NOT NULL, `password` VARCHAR(64) NOT NULL, PRIMARY KEY(`id`), UNIQUE(`username`));
 CREATE TABLE `levels` (`id` INT NOT NULL AUTO_INCREMENT, `uploader` INT NOT NULL, `cdn` VARCHAR(64) NULL, `name` VARCHAR(64) NOT NULL, `difficulty` INT NULL, `authors` JSON NULL, `description` TINYTEXT NULL, `thumb` VARCHAR(64) NULL, `extra` JSON NULL, PRIMARY KEY(`id`), FOREIGN KEY(`uploader`) REFERENCES `users`(`id`));
-INSERT INTO `users` (`username`, `password`) VALUES ('username', 'password'); // This is your local login for thumpnet
-INSERT INTO `levels` (`uploader`, `cdn`, `name`, `difficulty`, `authors`, `description`, `thumb`) VALUES ('1', 'test.zip', 'test', '0', '[1]', 'Test', 'thumb.png');
+// pending score and scores tables need added
 
 This is enough to get the api to respond with data. However the api doesnt know your sql login information.
-create `api/mysqli.ini`
+create `api/config.ini`
 
 Contents of this file should be as follows, but data replaced with the details you used
 
