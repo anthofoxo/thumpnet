@@ -32,8 +32,8 @@ if(isset($_GET["level"]))
     if(isset($row["difficulty"]))
         echo "<div>D" . htmlspecialchars($row["difficulty"]) . "</div>";
 
-    if($row["has_thumb"] == "1")
-        echo "<img src=\"cdn/" . $row["cdn"] . ".png\"/><br/>";
+    if(isset($row["thumbnail"]))
+        echo "<img src=\"cdn/" . $row["thumbnail"] . "\"/><br/>";
 
     else
         echo "<div>No difficulty</div>";

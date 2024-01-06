@@ -1,4 +1,4 @@
-<form enctype="multipart/form-data" hx-encoding="multipart/form-data" hx-post="/query/upload_level.php">
+<form enctype="multipart/form-data" hx-encoding="multipart/form-data" hx-post="/query/upload_level.php" hx-target="#content">
   <div>
     <label for="level_name">Level name</label>
     <input id="level_name" name="level_name" type="text"></input>
@@ -21,11 +21,11 @@
   </div>
   <div>
     <label for="sublevels">Number of sublevels</label>
-    <input id="sublevels" type="number"></input>
+    <input id="sublevels" name="sublevels" type="number"></input>
   </div>
   <div>
     <label for="bpm">Bpm</label>
-    <input id="bpm" type="number"></input>
+    <input id="bpm" name="bpm" type="number"></input>
   </div>
   <div>
     <label for="authors">Author(s)</label>
@@ -33,7 +33,7 @@
   </div>
   <div>
     <label for="song">Original song</label>
-    <input id="song" type="text"></input>
+    <input id="song" name="song" type="text"></input>
   </div>
   <input type="submit"></input>
 </form>

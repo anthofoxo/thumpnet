@@ -3,21 +3,21 @@
     <div class="level_title">{{name}}</div>
     <img class="level_difficulty_badge" src="images/D{{difficulty}}.png" alt="D{{difficulty}}"/>
 
-    {{#has_content}}
-    <a class="downloadbutton" href="cdn/{{cdn}}.zip">Download</a>
-    {{/has_content}}
+    {{#content}}
+    <a class="downloadbutton" href="cdn/{{content}}">Download</a>
+    {{/content}}
 
-    {{^has_content}}
+    {{^content}}
     <a class="downloadbutton" style="color:red;">No Download Available</a>
-    {{/has_content}}
+    {{/content}}
 
-    {{#has_thumb}}
-    <img class="stylinglevelimg" src="cdn/{{cdn}}.png"/>
-    {{/has_thumb}}
+    {{#thumbnail}}
+    <img class="stylinglevelimg" src="cdn/{{thumbnail}}"/>
+    {{/thumbnail}}
     
-    {{^has_thumb}}
+    {{^thumbnail}}
     <img class="stylinglevelimg" src="images/default_thumb.jpg"/>
-    {{/has_thumb}}
+    {{/thumbnail}}
 
     <div class="stylinglevelmetadata">
 
@@ -33,13 +33,17 @@
 
         <div><span style="font-weight:bold;">Uploaded by: </span><span>{{uploader}}</span></div>
 
-        {{#extra.bpm}}
-        <div><span style="font-weight:bold;">Bpm: </span><span>{{extra.bpm}}</span></div>
-        {{/extra.bpm}}
+        {{#bpm}}
+        <div><span style="font-weight:bold;">Bpm: </span><span>{{bpm}}</span></div>
+        {{/bpm}}
 
-        {{#extra.sublevels}}
-        <div><span style="font-weight:bold;">Num sublevels: </span><span>{{extra.sublevels}}</span></div>
-        {{/extra.sublevels}}
+        {{#sublevels}}
+        <div><span style="font-weight:bold;">Num sublevels: </span><span>{{sublevels}}</span></div>
+        {{/sublevels}}
+
+        {{#song}}
+        <div><span style="font-weight:bold;">Song: </span><span>{{song}}</span></div>
+        {{/song}}
 
         <a style="display:block;" hx-get="view.php?level={{id}}" hx-target="#content" hx-push-url="true">View</a>
     </div>

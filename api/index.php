@@ -14,15 +14,18 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
 
     // Required fields
     $element["id"] = intval($row["id"]);
-    $element["has_thumb"] = intval($row["has_thumb"]);
-    $element["has_content"] = intval($row["has_content"]);
     $element["uploader"] = intval($row["uploader"]);
 
     // Optional fields
-    $element["name"] = $row["name"];
-    $element["cdn"] = $row["cdn"];
-    $element["difficulty"] = intval($row["difficulty"]);
-    $element["description"] = $row["description"];
+    $element["name"] = $row["name"] ?? null;
+    $element["content"] = $row["content"] ?? null;
+    $element["thumbnail"] = $row["thumbnail"] ?? null;
+    $element["difficulty"] = intval($row["difficulty"]) ?? null;
+    $element["description"] = $row["description"] ?? null;
+
+    $element["bpm"] = $row["bpm"];
+    $element["sublevels"] = $row["sublevels"] ?? null;
+    $element["song"] = $row["song"] ?? null;
 
     if ($should_resolve_users)
         $user_ids[$row["uploader"]] = "";

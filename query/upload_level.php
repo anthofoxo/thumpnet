@@ -3,142 +3,130 @@
 // Otherwise reload the form
 session_start();
 
-if (!isset($_SESSION["id"])) exit; // You must be logged in to upload
-//if (!isset($_FILES["content"]["name"])) {
-//    echo "No file uploaded";
-//    exit; // You must upload a file to create an entry
-//}
+if (!isset($_SESSION["id"])) {
+    echo '<div hx-get="/landing.html" hx-trigger"load" hx-target="#content"></div>';
+    exit;
+}
+
+if (!isset($_FILES["content"]["name"])) {
+    echo '<div hx-get="/upload_level.html" hx-trigger"load" hx-target="#content"></div>';
+    exit;
+}
+
+if (empty($_POST["level_name"])) {
+    echo '<div hx-get="/upload_level.html" hx-trigger"load" hx-target="#content"></div>';
+    exit;
+}
 
 function format_uuidv4()
 {
     $data = random_bytes(16);
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100 (Version 4 uuid)
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
     $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
 
-$uuid = format_uuidv4(); // Generate a uuid for this upload
-
-// Upload level content
-if (isset($_FILES["content"]["name"])) {
-
-    $target_file = "../cdn/" . $uuid . ".zip";
-    $uploadOk = 1;
-    
-    // Check if file already exists
-    if (file_exists($target_file)) {
-      echo "Sorry, file already exists.";
-      $uploadOk = 0;
-    }
-    
-    // Check file size
-    if ($_FILES["content"]["size"] > 2048000) { // 2 Megabyte limit // May need to increase
-      echo "Sorry, your file is too large.";
-      $uploadOk = 0;
-    }
-    
-    $imageFileType = strtolower(pathinfo(basename($_FILES["content"]["name"]),PATHINFO_EXTENSION));
-    
-    // Allow certain file formats
-    if($imageFileType != "zip") {
-      echo "Sorry, only ZIP files are allowed.";
-      $uploadOk = 0;
-    }
-    
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-      echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-    } else {
-      if (move_uploaded_file($_FILES["content"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["content"]["name"])). " has been uploaded.";
-      } else {
-        echo "Sorry, there was an error uploading your file.";
-      }
-    }
-}
-
-// Upload thumbnail
-if (isset($_FILES["thumbnail"]["name"])) {
-
-    $target_file = "../cdn/" . $uuid . ".png";
-    $uploadOk = 1;
-    
-    $check = getimagesize($_FILES["thumbnail"]["tmp_name"]);
-    if($check !== false) {
-      echo "File is an image - " . $check["mime"] . ".";
-      $uploadOk = 1;
-    } else {
-      echo "File is not an image.";
-      $uploadOk = 0;
-    }
-
-    // Check if file already exists
-    if (file_exists($target_file)) {
-      echo "Sorry, file already exists.";
-      $uploadOk = 0;
-    }
-    
-    // Check file size
-    if ($_FILES["thumbnail"]["size"] > 2048000) { // 2 Megabyte limit // May need to increase
-      echo "Sorry, your file is too large.";
-      $uploadOk = 0;
-    }
-    
-    $imageFileType = strtolower(pathinfo(basename($_FILES["thumbnail"]["name"]),PATHINFO_EXTENSION));
-    
-    // Allow certain file formats
-    if($imageFileType != "png") {
-      echo "Sorry, only PNG files are allowed.";
-      $uploadOk = 0;
-    }
-    
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-      echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-    } else {
-      if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["thumbnail"]["name"])). " has been uploaded.";
-      } else {
-        echo "Sorry, there was an error uploading your file.";
-      }
-    }
-}
-
-// Make database connection
 include "../api/db.php";
 
-$one = 1;
-$nullp = NULL;
+// Get unique uuids for content and thumbnail
 
-$authors = "[" . $_SESSION["id"] . "]";
+$content_uuid = null;
 
-$stmt = $mysqli->prepare("INSERT INTO `levels` (`uploader`, `cdn`, `name`, `difficulty`, `authors`, `description`, `has_content`, `has_thumb`, `extra`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ississiis", $_SESSION["id"], $uuid, $_POST["level_name"], $_POST["difficulty"], $authors, $_POST["description"], $one, $one, $nullp);
+if (isset($_FILES["content"]["name"])) {
+    // Make sure the uploaded file passes the tests before trying anything more
+
+    if ($_FILES["content"]["size"] > 128 * 1024 * 1024) { // 128 Mebibyte limit
+        echo "Sorry, your file is too large.";
+        exit;
+    }
+
+    if(strtolower(pathinfo(basename($_FILES["content"]["name"]),PATHINFO_EXTENSION)) != "zip") {
+      echo "Sorry, only ZIP files are allowed.";
+      exit;
+    }
+
+    do {
+        $content_uuid = format_uuidv4();
+    } while(file_exists("../cdn/" . $content_uuid));
+}
+
+$thumbnail_uuid = null;
+
+if (isset($_FILES["thumbnail"]["name"])) {
+
+    if ($_FILES["thumbnail"]["size"] > 16 * 1024 * 1024) { // 16 Mebibyte limit
+        echo "Sorry, your file is too large.";
+        exit;
+    }
+
+    if(strtolower(pathinfo(basename($_FILES["thumbnail"]["name"]),PATHINFO_EXTENSION)) != "png") {
+      echo "Sorry, only PNG files are allowed.";
+      exit;
+    }
+
+    $check = getimagesize($_FILES["thumbnail"]["tmp_name"]);
+    if($check === false) {
+      echo "File is not an image.";
+      exit;
+    }
+
+    do {
+        $thumbnail_uuid = format_uuidv4();
+    } while(file_exists("../cdn/" . $thumbnail_uuid));
+}
+
+// Begin a transaction, this may have to be rolled back
+$mysqli->begin_transaction();
+
+$uploader = $_SESSION["id"];
+$name = $_POST["level_name"];
+$description = empty($_POST["description"]) ? null : $_POST["description"];
+$authors = empty($_POST["authors"]) ? null : $_POST["authors"];
+$difficulty = $_POST["difficulty"];
+$bpm = $_POST["bpm"];
+$sublevels = $_POST["sublevels"];
+$song = empty($_POST["song"]) ? null : $_POST["song"];
+
+$stmt = $mysqli->prepare("INSERT INTO `levels` (`uploader`, `name`, `content`, `thumbnail`, `description`, `authors`, `difficulty`, `bpm`, `sublevels`, `song`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+$stmt->bind_param("isssssiiis", $uploader, $name, $content_uuid, $thumbnail_uuid, $description, $authors, $difficulty, $bpm, $sublevels, $song);
 if(!$stmt->execute())
 {
     echo '<h1>Operation Failed</h1>';
+    $mysqli->rollback();
     exit;
 }
 
-$stmt = $mysqli->prepare("SELECT `id` FROM `levels` WHERE `cdn` = ?");
-$stmt->bind_param("s", $uuid);
-if(!$stmt->execute())
-{
-    echo '<h1>Operation Failed</h1>';
-    exit;
+// Database query worked, file checks passed, attempt to upload files
+
+if(isset($content_uuid)){
+    if (move_uploaded_file($_FILES["content"]["tmp_name"], "../cdn/" . $content_uuid)) {
+        echo "The file ". htmlspecialchars( basename( $_FILES["content"]["name"])). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+        $mysqli->rollback();
+        exit;
+    }
 }
 
+if(isset($thumbnail_uuid)){
+    if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "../cdn/" . $thumbnail_uuid)) {
+        // success
+        echo "The file ". htmlspecialchars( basename( $_FILES["content"]["name"])). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+        $mysqli->rollback();
+        exit;
+    }
+}
+
+$mysqli->commit();
+
+// We succeeded, make a fetch and display the level
+$stmt = $mysqli->prepare("SELECT `id` FROM `levels` WHERE `content` = ?");
+$stmt->bind_param("s", $content_uuid);
+if(!$stmt->execute()) exit;
 $result = $stmt->get_result();
-
-if($result->num_rows != 1)
-{
-    echo "Invalid";
-    exit;
-}
-
+if($result->num_rows != 1) exit;
 $row = $result->fetch_assoc();
-
 echo '<div hx-get="/view.php?level=' . $row["id"] . 'hx-target="#content" hx-trigger="load"></div>';
 ?>
