@@ -1,0 +1,29 @@
+<script>
+function submit() {
+
+    var xhr = new XMLHttpRequest();
+    var url = "/endpoint/" + document.getElementById("endpoint").value + "/";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            document.getElementById("http").textContent = xhr.status;
+            document.getElementById("response").textContent = JSON.stringify(JSON.parse(xhr.responseText), null, 2);
+        }
+    }
+    
+
+    xhr.send(document.getElementById("request").value);
+
+}
+</script>
+
+Test out the endpoints <br>
+
+Endpoint: <input id="endpoint" type="text" value="info"></input><br>
+Request body: <br>
+<textarea id="request"></textarea><br>
+<input type="button" onclick="submit()" value="Submit"></input>
+
+Response: <div id="http"></div><br>
+<textarea id="response"></textarea>

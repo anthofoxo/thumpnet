@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>ThumpNet</title>
+        <link rel="stylesheet" href="/landing.css"/>
+
+        <script src="/htmx.min.js"></script>
+        <script src="/mustache.js"></script>
+        <script defer src="/marked.min.js"></script>
+        <script defer src="/prism.min.js"></script>
+        <script type="module" src="/zero-md.min.js"></script>
+    </head>
+    <body>
+        <zero-md src="api.md">
+            <template>
+                <link rel="stylesheet" href="/global.css"/>
+            </template>
+        </zero-md>
+    </body>
+</html>
+
