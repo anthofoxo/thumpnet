@@ -3,21 +3,21 @@
     <div class="level_title">{{name}}</div>
     <img class="level_difficulty_badge" src="images/D{{difficulty}}.png" alt="D{{difficulty}}"/>
 
-    {{#content}}
-    <a class="downloadbutton" href="cdn/{{content}}">Download</a>
-    {{/content}}
+    {{#cdn}}
+    <a class="downloadbutton" href="cdn/{{cdn}}/content.zip">Download</a>
+    {{/cdn}}
 
-    {{^content}}
+    {{^cdn}}
     <a class="downloadbutton" style="color:red;">No Download Available</a>
-    {{/content}}
+    {{/cdn}}
 
-    {{#thumbnail}}
-    <img class="stylinglevelimg" src="cdn/{{thumbnail}}"/>
-    {{/thumbnail}}
+    {{#cdn}}
+    <img class="stylinglevelimg" src="cdn/{{cdn}}/thumb.png"/>
+    {{/cdn}}
     
-    {{^thumbnail}}
+    {{^cdn}}
     <img class="stylinglevelimg" src="images/default_thumb.jpg"/>
-    {{/thumbnail}}
+    {{/cdn}}
 
     <div class="stylinglevelmetadata">
 

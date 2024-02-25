@@ -44,17 +44,27 @@ The API has some custom types to make note of how it's expected to be used.
 Used to fetch a level list and level information.
 
 #### Request object
-| Field    | Type      | Default | Description           |
-| -------- | --------- | ------- | --------------------- |
-| ?offset  | int?      | 0       | Offset into datablock |
-| ?limit   | int?      | 10      | Max levels to return  |
-| ?expand  | string[]? | null    | Expand list           |
+| Field     | Type      | Default     | Description           |
+| --------- | --------- | ----------- | --------------------- |
+| ?offset   | int?      | 0           | Offset into datablock |
+| ?limit    | int?      | 10          | Max levels to return  |
+| ?expand   | string[]? | null        | Expand list           |
+| ?filter   | string?   | ""          | Level search terms, leave empty to select everything |
+| ?sort     | string?   | <See below> | Sorting method                                       |
+| ?sort_dir | string?   | "asc"       | Sorting direction, "asc" or "desc"                   |
+
+#### Sorting methods
+* `relevance` - Sort to best match the search terms
+* `alphabetical` - Sort alphabetically
+* `timestamp` - Sort by upload date
+* `difficulty` - Sort by difficulty
 
 #### Response object
-| Field    | Type      | Description      |
-| -------- | --------- | ---------------- |
-| count    | int       | Number of levels |
-| ?levels  | $level[]? | Fetched levels   |
+| Field     | Type      | Description        |
+| --------- | --------- | ------------------ |
+| count     | int       | Number of levels   |
+| ?levels   | $level[]? | Fetched levels     |
+| ?warnings | string[]? | Generated warnings |
 
 #### Level Object
 | Field        | Type      | Description         |
@@ -62,8 +72,9 @@ Used to fetch a level list and level information.
 | id           | int       | Level id            |
 | uploader     | $user     | Level uploader      |
 | name         | string    | Level name          |
-| ?content     | dl?       | DL Reference        |
-| ?thumbnail   | dl?       | DL Reference        |
+| ?cdn         | dl?       | DL Reference        |
+| (Removed)?content     | dl?       | DL Reference        |
+| (Removed)?thumbnail   | dl?       | DL Reference        |
 | ?description | string?   | Level description   |
 | ?authors     | $user[]?  | Authors             |
 | ?difficulty  | int?      | Level difficulty    |

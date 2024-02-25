@@ -11,9 +11,41 @@ if ($request == null) {
 }
 
 $response = [];
+$response["warnings"] = [];
 
 $offset = $request["offset"] ?? 0;
 $limit = $request["limit"] ?? 10;
+
+if($limit > 100) {
+    $limit = 100;
+    $response["warnings"][] = "limit too high, capped to 100";
+}
+
+$filter = $request["filter"] ?? "";
+$sort = $request["sort"] ?? "";
+
+$sort_dir = "";
+
+if($filter == "") {
+    $sort_sql = "`id`";
+    $sort_dir = "desc";
+}
+else {
+    $sort_sql = "LENGTH(`name`)";
+    $sort_dir = "asc";
+}
+
+if ($sort == "relevance") $sort_sql = "LENGTH(`name`)";
+else if ($sort == "alphabetical") $sort_sql = "`name`";
+else if ($sort == "timestamp") $sort_sql = "`id`";
+else if ($sort == "difficulty") $sort_sql = "`difficulty`";
+
+$filter = explode(" ", $filter);
+
+if(isset($request["sort_dir"])) {
+    if("asc" == $request["sort_dir"]) $sort_dir = "ASC";
+    if("desc" == $request["sort_dir"]) $sort_dir = "DESC";
+}
 
 include "../../db.php";
 
@@ -32,10 +64,40 @@ if ($resolve_user) {
     }
 }
 
-$stmt = $mysqli->prepare("SELECT * FROM levels ORDER BY id DESC LIMIT ?, ?");
-$stmt->bind_param("ii", $offset, $limit);
-$stmt->execute();
-$result = $stmt->get_result();
+$result = "";
+
+if(count($filter) > 0) {
+    $query = "SELECT * FROM `levels` WHERE `name` LIKE CONCAT('%', ?, '%')";
+
+    for($i = 1; $i < count($filter); $i += 1) {
+        $query .= "AND `name` LIKE CONCAT('%', ?, '%') ";
+    }
+    
+    $query .= "ORDER BY " . $sort_sql . " " . $sort_dir . " LIMIT ?, ?";
+
+    $bindtypes = "";
+    $vars = array();
+
+    for($i = 0; $i < count($filter); $i++) {
+        $bindtypes .= "s";
+        $vars[] = $filter[$i];
+    }
+
+    $bindtypes .= "ii";
+    $vars[] = $offset;
+    $vars[] = $limit;
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param($bindtypes, ...$vars);
+    $stmt->execute();
+    $result = $stmt->get_result();
+}
+else {
+    $stmt = $mysqli->prepare("SELECT * FROM levels ORDER BY " . $sort_sql . " " . $sort_dir . " LIMIT ?, ?");
+    $stmt->bind_param("ii", $offset, $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+}
 
 for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
 {

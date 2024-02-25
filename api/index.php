@@ -18,8 +18,7 @@ for ($row_no = 0; $row_no < $result->num_rows; $row_no++)
 
     // Optional fields
     $element["name"] = $row["name"] ?? null;
-    $element["content"] = $row["content"] ?? null;
-    $element["thumbnail"] = $row["thumbnail"] ?? null;
+    $element["cdn"] = $row["cdn"] ?? null;
     $element["difficulty"] = intval($row["difficulty"]) ?? null;
     $element["description"] = $row["description"] ?? null;
 
